@@ -1,16 +1,23 @@
-# phone_auth_project
+# Phone Number Authentication Using Flutter & Firebase
 
-A new Flutter project.
+This is the source code for Phone Authentication in FLutter.<br>
 
-## Getting Started
+## App Features
+- Login Using Phone Number.<br>
+- Send OTP to device.<br>
+- Auto Verification of OTP.<br>
+- Manually Entering OTP & Verifying it.<br><br>
 
-This project is a starting point for a Flutter application.
+For Step By Step Guide Follow Video Tutorial:
 
-A few resources to get you started if this is your first Flutter project:
+- [Flutter Phone Authentication | Implementing Phone Auth Using Flutter & Firebase](https://youtu.be/PEUUYOQ2Ixo)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Links used in project:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Firebase Core](https://pub.dev/packages/firebase_core)
+- [Firebase Auth](https://pub.dev/packages/firebase_auth)
+- [PinPut](https://pub.dev/packages/pinput)
+<br><br>
+
+Feel Free to copy the code and use it.<br><br>
+Don't forget to star the repo and like the video :)
