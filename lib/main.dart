@@ -6,7 +6,10 @@ import 'login.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Firebase.initializeApp();
-  runApp(MaterialApp(home: MyApp()));
+  runApp(MaterialApp(
+    home: MyApp(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
 
 class MyApp extends StatelessWidget {

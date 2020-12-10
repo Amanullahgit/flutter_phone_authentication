@@ -107,7 +107,7 @@ class _OTPScreenState extends State<OTPScreen> {
             _verificationCode = verificationID;
           });
         },
-        timeout: Duration(seconds: 60));
+        timeout: Duration(seconds: 120));
   }
 
   @override
