@@ -32,6 +32,7 @@ dependencies:
   firebase_core: ^1.7.0
   pinput: ^0.2.6
   flutter_form_builder: ^6.1.0+1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
