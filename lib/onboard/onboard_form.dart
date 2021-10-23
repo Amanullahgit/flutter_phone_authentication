@@ -3,30 +3,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 // import 'package:intl/intl.dart';
 
-
-
-class CompleteForm extends StatefulWidget {
+class Onboarding extends StatefulWidget {
   @override
-  CompleteFormState createState() {
-    return CompleteFormState();
+  OnboardingState createState() {
+    return OnboardingState();
   }
 }
 
-class CompleteFormState extends State<CompleteForm> {
+class OnboardingState extends State<Onboarding> {
   bool autoValidate = true;
   bool readOnly = false;
   bool showSegmentedControl = true;
   final _formKey = GlobalKey<FormBuilderState>();
   bool _ageHasError = false;
-  bool _genderHasError = false;
+  bool _locationHasError = false;
+  bool _nameHasError = false;
+  bool _educationHasError = false;
+  bool _jobTitleHasError = false;
+  bool _currentCompanyNameHasError = false;
+  bool _currentMonthlyIncomeHasError = false;
 
   final ValueChanged _onChanged = (val) => print(val);
-  var genderOptions = ['Male', 'Female', 'Other'];
+  var locationOptions = ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'];
+  var educationOptions = [
+    '10th or below 10th',
+    '12th pass',
+    'Diploma',
+    'ITI',
+    'Graduate',
+    'Post Graduate'
+  ];
+  var workExpOptions = ['1 year', '2 year', '3 year', '4 year', '5+ year'];
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: Padding(
+        body: Padding(
       padding: const EdgeInsets.all(10),
       child: SingleChildScrollView(
         child: Column(
@@ -38,120 +50,22 @@ class CompleteFormState extends State<CompleteForm> {
               initialValue: {
                 'movie_rating': 5,
                 'best_language': 'Dart',
-                'age': '13',
-                'gender': 'Male'
+                '': '13',
+                'location': 'Bengalure',
+                'workExp': '3 year',
               },
               skipDisabled: true,
               child: Column(
                 children: <Widget>[
-                  const SizedBox(height: 15),
-                  // FormBuilderDateTimePicker(
-                  //   name: 'date',
-                  //   initialValue: DateTime.now(),
-                  //   inputType: InputType.time,
-                  //   decoration: InputDecoration(
-                  //     labelText: 'Appointment Time',
-                  //     suffixIcon: IconButton(
-                  //         icon: Icon(Icons.close),
-                  //         onPressed: () {
-                  //           _formKey.currentState?.fields['date']
-                  //               ?.didChange(null);
-                  //         }),
-                  //   ),
-                  //   initialTime: TimeOfDay(hour: 8, minute: 0),
-                  //   locale: Locale.fromSubtags(languageCode: 'fr'),
-                  // ),
-                  // FormBuilderDateRangePicker(
-                  //   name: 'date_range',
-                  //   firstDate: DateTime(1970),
-                  //   lastDate: DateTime(2030),
-                  //   format: DateFormat('yyyy-MM-dd'),
-                  //   onChanged: _onChanged,
-                  //   decoration: InputDecoration(
-                  //     labelText: 'Date Range',
-                  //     helperText: 'Helper text',
-                  //     hintText: 'Hint text',
-                  //     suffixIcon: IconButton(
-                  //         icon: Icon(Icons.close),
-                  //         onPressed: () {
-                  //           _formKey.currentState?.fields['date_range']
-                  //               ?.didChange(null);
-                  //         }),
-                  //   ),
-                  // ),
-                  // FormBuilderSlider(
-                  //   name: 'slider',
-                  //   validator: FormBuilderValidators.compose([
-                  //     FormBuilderValidators.min(context, 6),
-                  //   ]),
-                  //   onChanged: _onChanged,
-                  //   min: 0.0,
-                  //   max: 10.0,
-                  //   initialValue: 7.0,
-                  //   divisions: 20,
-                  //   activeColor: Colors.red,
-                  //   inactiveColor: Colors.pink[100],
-                  //   decoration: const InputDecoration(
-                  //     labelText: 'Number of things',
-                  //   ),
-                  // ),
-                  // FormBuilderRangeSlider(
-                  //   name: 'range_slider',
-                  //   // validator: FormBuilderValidators.compose([FormBuilderValidators.min(context, 6)]),
-                  //   onChanged: _onChanged,
-                  //   min: 0.0,
-                  //   max: 100.0,
-                  //   initialValue: RangeValues(4, 7),
-                  //   divisions: 20,
-                  //   activeColor: Colors.red,
-                  //   inactiveColor: Colors.pink[100],
-                  //   decoration: const InputDecoration(labelText: 'Price Range'),
-                  // ),
-                  // FormBuilderCheckbox(
-                  //   name: 'accept_terms',
-                  //   initialValue: false,
-                  //   onChanged: _onChanged,
-                  //   title: RichText(
-                  //     text: TextSpan(
-                  //       children: [
-                  //         TextSpan(
-                  //           text: 'I have read and agree to the ',
-                  //           style: TextStyle(color: Colors.black),
-                  //         ),
-                  //         TextSpan(
-                  //           text: 'Terms and Conditions',
-                  //           style: TextStyle(color: Colors.blue),
-                  //           // Flutter doesn't allow a button inside a button
-                  //           // https://github.com/flutter/flutter/issues/31437#issuecomment-492411086
-                  //           /*
-                  //           recognizer: TapGestureRecognizer()
-                  //             ..onTap = () {
-                  //               print('launch url');
-                  //             },
-                  //           */
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  //   validator: FormBuilderValidators.equal(
-                  //     context,
-                  //     true,
-                  //     errorText:
-                  //         'You must accept terms and conditions to continue',
-                  //   ),
-                  // ),
                   FormBuilderTextField(
                     autovalidateMode: AutovalidateMode.always,
-                    name: 'age',
+                    name: 'name',
                     decoration: InputDecoration(
-                      labelText: 'Age',
-                      suffixIcon: _ageHasError
-                          ? const Icon(Icons.error, color: Colors.red)
-                          : const Icon(Icons.check, color: Colors.green),
+                      labelText: 'Name',
                     ),
                     onChanged: (val) {
                       setState(() {
-                        _ageHasError = !(_formKey.currentState?.fields['age']
+                        _nameHasError = !(_formKey.currentState?.fields['name']
                                 ?.validate() ??
                             false);
                       });
@@ -159,104 +73,161 @@ class CompleteFormState extends State<CompleteForm> {
                     // valueTransformer: (text) => num.tryParse(text),
                     validator: FormBuilderValidators.compose([
                       FormBuilderValidators.required(context),
-                      FormBuilderValidators.numeric(context),
-                      FormBuilderValidators.max(context, 70),
+                      FormBuilderValidators.max(context, 100),
                     ]),
                     // initialValue: '12',
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.name,
                     textInputAction: TextInputAction.next,
                   ),
                   FormBuilderDropdown<String>(
                     // autovalidate: true,
-                    name: 'gender',
+                    name: 'location',
                     decoration: InputDecoration(
-                      labelText: 'Gender',
-                      suffix: _genderHasError
-                          ? const Icon(Icons.error)
-                          : const Icon(Icons.check),
+                      labelText: 'Location',
                     ),
                     // initialValue: 'Male',
                     allowClear: true,
-                    hint: Text('Select Gender'),
+                    hint: Text('Select Location'),
                     validator: FormBuilderValidators.compose(
                         [FormBuilderValidators.required(context)]),
-                    items: genderOptions
-                        .map((gender) => DropdownMenuItem(
-                              value: gender,
-                              child: Text(gender),
+                    items: locationOptions
+                        .map((location) => DropdownMenuItem(
+                              value: location,
+                              child: Text(location),
                             ))
                         .toList(),
                     onChanged: (val) {
                       setState(() {
-                        _genderHasError = !(_formKey
-                                .currentState?.fields['gender']
+                        _locationHasError = !(_formKey
+                                .currentState?.fields['location']
                                 ?.validate() ??
                             false);
                       });
                     },
                     valueTransformer: (val) => val?.toString(),
                   ),
-                  FormBuilderRadioGroup<String>(
-                    decoration: const InputDecoration(
-                      labelText: 'My chosen language',
+                  FormBuilderDropdown<String>(
+                    // autovalidate: true,
+                    name: 'education',
+                    decoration: InputDecoration(
+                      labelText: 'Education',
                     ),
-                    initialValue: null,
-                    name: 'best_language',
-                    onChanged: _onChanged,
+                    // initialValue: 'Male',
+                    allowClear: true,
+                    hint: Text('Select Education'),
                     validator: FormBuilderValidators.compose(
                         [FormBuilderValidators.required(context)]),
-                    options: ['Dart', 'Kotlin', 'Java', 'Swift', 'Objective-C']
-                        .map((lang) => FormBuilderFieldOption(
-                              value: lang,
-                              child: Text(lang),
+                    items: educationOptions
+                        .map((education) => DropdownMenuItem(
+                              value: education,
+                              child: Text(education),
                             ))
-                        .toList(growable: false),
-                    controlAffinity: ControlAffinity.trailing,
+                        .toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        _educationHasError = !(_formKey
+                                .currentState?.fields['education']
+                                ?.validate() ??
+                            false);
+                      });
+                    },
+                    valueTransformer: (val) => val?.toString(),
                   ),
-                  // FormBuilderSegmentedControl(
-                  //   decoration: const InputDecoration(
-                  //     labelText: 'Movie Rating (Archer)',
-                  //   ),
-                  //   name: 'movie_rating',
-                  //   // initialValue: 1,
-                  //   // textStyle: TextStyle(fontWeight: FontWeight.bold),
-                  //   options: List.generate(5, (i) => i + 1)
-                  //       .map((number) => FormBuilderFieldOption(
-                  //             value: number,
-                  //             child: Text(
-                  //               number.toString(),
-                  //               style: const TextStyle(
-                  //                   fontWeight: FontWeight.bold),
-                  //             ),
-                  //           ))
-                  //       .toList(),
-                  //   onChanged: _onChanged,
-                  // ),
-                  // FormBuilderSwitch(
-                  //   title: const Text('I Accept the tems and conditions'),
-                  //   name: 'accept_terms_switch',
-                  //   initialValue: true,
-                  //   onChanged: _onChanged,
-                  // ),
-                  // FormBuilderCheckboxGroup(
-                  //   decoration: const InputDecoration(
-                  //       labelText: 'The language of my people'),
-                  //   name: 'languages',
-                  //   // initialValue: const ['Dart'],
-                  //   options: const [
-                  //     FormBuilderFieldOption(value: 'Dart'),
-                  //     FormBuilderFieldOption(value: 'Kotlin'),
-                  //     FormBuilderFieldOption(value: 'Java'),
-                  //     FormBuilderFieldOption(value: 'Swift'),
-                  //     FormBuilderFieldOption(value: 'Objective-C'),
-                  //   ],
-                  //   onChanged: _onChanged,
-                  //   separator: const VerticalDivider(
-                  //     width: 10,
-                  //     thickness: 5,
-                  //     color: Colors.red,
-                  //   ),
-                  // ),
+                  FormBuilderDropdown<String>(
+                    // autovalidate: true,
+                    name: 'workExp',
+                    decoration: InputDecoration(
+                      labelText: 'Total Work Experience',
+                    ),
+                    // initialValue: 'Male',
+                    allowClear: true,
+                    hint: Text('Experience'),
+                    validator: FormBuilderValidators.compose(
+                        [FormBuilderValidators.required(context)]),
+                    items: workExpOptions
+                        .map((location) => DropdownMenuItem(
+                              value: location,
+                              child: Text(location),
+                            ))
+                        .toList(),
+                    onChanged: (val) {
+                      setState(() {
+                        _locationHasError = !(_formKey
+                                .currentState?.fields['workExp']
+                                ?.validate() ??
+                            false);
+                      });
+                    },
+                    valueTransformer: (val) => val?.toString(),
+                  ),
+                  FormBuilderTextField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    name: 'jobTitle',
+                    decoration: InputDecoration(
+                      labelText: 'Job Title',
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        _jobTitleHasError = !(_formKey
+                                .currentState?.fields['jobTitle']
+                                ?.validate() ??
+                            false);
+                      });
+                    },
+                    // valueTransformer: (text) => num.tryParse(text),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.max(context, 100),
+                    ]),
+                    // initialValue: '12',
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  FormBuilderTextField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    name: 'currentCompanyName',
+                    decoration: InputDecoration(
+                      labelText: 'Current Company Name',
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        _currentCompanyNameHasError = !(_formKey
+                                .currentState?.fields['currentCompanyName']
+                                ?.validate() ??
+                            false);
+                      });
+                    },
+                    // valueTransformer: (text) => num.tryParse(text),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.max(context, 100),
+                    ]),
+                    // initialValue: '12',
+                    keyboardType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  FormBuilderTextField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    name: 'currentMonthlyIncome',
+                    decoration: InputDecoration(
+                      labelText: 'Current Monthly Income',
+                    ),
+                    onChanged: (val) {
+                      setState(() {
+                        _currentMonthlyIncomeHasError = !(_formKey
+                                .currentState?.fields['currentMonthlyIncome']
+                                ?.validate() ??
+                            false);
+                      });
+                    },
+                    // valueTransformer: (text) => num.tryParse(text),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                    ]),
+                    // initialValue: '12',
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.next,
+                  ),
                 ],
               ),
             ),
@@ -298,8 +269,6 @@ class CompleteFormState extends State<CompleteForm> {
           ],
         ),
       ),
-    )
-    );
+    ));
   }
 }
-
