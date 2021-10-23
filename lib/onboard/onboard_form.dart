@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:phone_auth_project/home.dart';
+import './../home.dart';
 // import 'package:intl/intl.dart';
 
 class Onboarding extends StatefulWidget {
@@ -38,237 +40,247 @@ class OnboardingState extends State<Onboarding> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+        appBar: AppBar(
+          title: Text('Onboarding'),
+        ),
         body: Padding(
-      padding: const EdgeInsets.all(10),
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            FormBuilder(
-              key: _formKey,
-              // enabled: false,
-              autovalidateMode: AutovalidateMode.disabled,
-              initialValue: {
-                'movie_rating': 5,
-                'best_language': 'Dart',
-                '': '13',
-                'location': 'Bengalure',
-                'workExp': '3 year',
-              },
-              skipDisabled: true,
-              child: Column(
-                children: <Widget>[
-                  FormBuilderTextField(
-                    autovalidateMode: AutovalidateMode.always,
-                    name: 'name',
-                    decoration: InputDecoration(
-                      labelText: 'Name',
-                    ),
-                    onChanged: (val) {
-                      setState(() {
-                        _nameHasError = !(_formKey.currentState?.fields['name']
-                                ?.validate() ??
-                            false);
-                      });
-                    },
-                    // valueTransformer: (text) => num.tryParse(text),
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(context),
-                      FormBuilderValidators.max(context, 100),
-                    ]),
-                    // initialValue: '12',
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                  ),
-                  FormBuilderDropdown<String>(
-                    // autovalidate: true,
-                    name: 'location',
-                    decoration: InputDecoration(
-                      labelText: 'Location',
-                    ),
-                    // initialValue: 'Male',
-                    allowClear: true,
-                    hint: Text('Select Location'),
-                    validator: FormBuilderValidators.compose(
-                        [FormBuilderValidators.required(context)]),
-                    items: locationOptions
-                        .map((location) => DropdownMenuItem(
-                              value: location,
-                              child: Text(location),
-                            ))
-                        .toList(),
-                    onChanged: (val) {
-                      setState(() {
-                        _locationHasError = !(_formKey
-                                .currentState?.fields['location']
-                                ?.validate() ??
-                            false);
-                      });
-                    },
-                    valueTransformer: (val) => val?.toString(),
-                  ),
-                  FormBuilderDropdown<String>(
-                    // autovalidate: true,
-                    name: 'education',
-                    decoration: InputDecoration(
-                      labelText: 'Education',
-                    ),
-                    // initialValue: 'Male',
-                    allowClear: true,
-                    hint: Text('Select Education'),
-                    validator: FormBuilderValidators.compose(
-                        [FormBuilderValidators.required(context)]),
-                    items: educationOptions
-                        .map((education) => DropdownMenuItem(
-                              value: education,
-                              child: Text(education),
-                            ))
-                        .toList(),
-                    onChanged: (val) {
-                      setState(() {
-                        _educationHasError = !(_formKey
-                                .currentState?.fields['education']
-                                ?.validate() ??
-                            false);
-                      });
-                    },
-                    valueTransformer: (val) => val?.toString(),
-                  ),
-                  FormBuilderDropdown<String>(
-                    // autovalidate: true,
-                    name: 'workExp',
-                    decoration: InputDecoration(
-                      labelText: 'Total Work Experience',
-                    ),
-                    // initialValue: 'Male',
-                    allowClear: true,
-                    hint: Text('Experience'),
-                    validator: FormBuilderValidators.compose(
-                        [FormBuilderValidators.required(context)]),
-                    items: workExpOptions
-                        .map((location) => DropdownMenuItem(
-                              value: location,
-                              child: Text(location),
-                            ))
-                        .toList(),
-                    onChanged: (val) {
-                      setState(() {
-                        _locationHasError = !(_formKey
-                                .currentState?.fields['workExp']
-                                ?.validate() ??
-                            false);
-                      });
-                    },
-                    valueTransformer: (val) => val?.toString(),
-                  ),
-                  FormBuilderTextField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    name: 'jobTitle',
-                    decoration: InputDecoration(
-                      labelText: 'Job Title',
-                    ),
-                    onChanged: (val) {
-                      setState(() {
-                        _jobTitleHasError = !(_formKey
-                                .currentState?.fields['jobTitle']
-                                ?.validate() ??
-                            false);
-                      });
-                    },
-                    // valueTransformer: (text) => num.tryParse(text),
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(context),
-                      FormBuilderValidators.max(context, 100),
-                    ]),
-                    // initialValue: '12',
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                  ),
-                  FormBuilderTextField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    name: 'currentCompanyName',
-                    decoration: InputDecoration(
-                      labelText: 'Current Company Name',
-                    ),
-                    onChanged: (val) {
-                      setState(() {
-                        _currentCompanyNameHasError = !(_formKey
-                                .currentState?.fields['currentCompanyName']
-                                ?.validate() ??
-                            false);
-                      });
-                    },
-                    // valueTransformer: (text) => num.tryParse(text),
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(context),
-                      FormBuilderValidators.max(context, 100),
-                    ]),
-                    // initialValue: '12',
-                    keyboardType: TextInputType.name,
-                    textInputAction: TextInputAction.next,
-                  ),
-                  FormBuilderTextField(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    name: 'currentMonthlyIncome',
-                    decoration: InputDecoration(
-                      labelText: 'Current Monthly Income',
-                    ),
-                    onChanged: (val) {
-                      setState(() {
-                        _currentMonthlyIncomeHasError = !(_formKey
-                                .currentState?.fields['currentMonthlyIncome']
-                                ?.validate() ??
-                            false);
-                      });
-                    },
-                    // valueTransformer: (text) => num.tryParse(text),
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(context),
-                    ]),
-                    // initialValue: '12',
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.next,
-                  ),
-                ],
-              ),
-            ),
-            Row(
+          padding: const EdgeInsets.all(10),
+          child: SingleChildScrollView(
+            child: Column(
               children: <Widget>[
-                Expanded(
-                  child: MaterialButton(
-                    color: Theme.of(context).colorScheme.secondary,
-                    onPressed: () {
-                      if (_formKey.currentState?.saveAndValidate() ?? false) {
-                        print(_formKey.currentState?.value);
-                      } else {
-                        print(_formKey.currentState?.value);
-                        print('validation failed');
-                      }
-                    },
-                    child: const Text(
-                      'Submit',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                FormBuilder(
+                  key: _formKey,
+                  // enabled: false,
+                  autovalidateMode: AutovalidateMode.disabled,
+                  initialValue: {
+                    'movie_rating': 5,
+                    'best_language': 'Dart',
+                    '': '13',
+                    'location': 'Bengalure',
+                    'workExp': '3 year',
+                  },
+                  skipDisabled: true,
+                  child: Column(
+                    children: <Widget>[
+                      FormBuilderTextField(
+                        autovalidateMode: AutovalidateMode.always,
+                        name: 'name',
+                        decoration: InputDecoration(
+                          labelText: 'Name',
+                        ),
+                        onChanged: (val) {
+                          setState(() {
+                            _nameHasError = !(_formKey
+                                    .currentState?.fields['name']
+                                    ?.validate() ??
+                                false);
+                          });
+                        },
+                        // valueTransformer: (text) => num.tryParse(text),
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(context),
+                          FormBuilderValidators.max(context, 100),
+                        ]),
+                        // initialValue: '12',
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      FormBuilderDropdown<String>(
+                        // autovalidate: true,
+                        name: 'location',
+                        decoration: InputDecoration(
+                          labelText: 'Location',
+                        ),
+                        // initialValue: 'Male',
+                        allowClear: true,
+                        hint: Text('Select Location'),
+                        validator: FormBuilderValidators.compose(
+                            [FormBuilderValidators.required(context)]),
+                        items: locationOptions
+                            .map((location) => DropdownMenuItem(
+                                  value: location,
+                                  child: Text(location),
+                                ))
+                            .toList(),
+                        onChanged: (val) {
+                          setState(() {
+                            _locationHasError = !(_formKey
+                                    .currentState?.fields['location']
+                                    ?.validate() ??
+                                false);
+                          });
+                        },
+                        valueTransformer: (val) => val?.toString(),
+                      ),
+                      FormBuilderDropdown<String>(
+                        // autovalidate: true,
+                        name: 'education',
+                        decoration: InputDecoration(
+                          labelText: 'Education',
+                        ),
+                        // initialValue: 'Male',
+                        allowClear: true,
+                        hint: Text('Select Education'),
+                        validator: FormBuilderValidators.compose(
+                            [FormBuilderValidators.required(context)]),
+                        items: educationOptions
+                            .map((education) => DropdownMenuItem(
+                                  value: education,
+                                  child: Text(education),
+                                ))
+                            .toList(),
+                        onChanged: (val) {
+                          setState(() {
+                            _educationHasError = !(_formKey
+                                    .currentState?.fields['education']
+                                    ?.validate() ??
+                                false);
+                          });
+                        },
+                        valueTransformer: (val) => val?.toString(),
+                      ),
+                      FormBuilderDropdown<String>(
+                        // autovalidate: true,
+                        name: 'workExp',
+                        decoration: InputDecoration(
+                          labelText: 'Total Work Experience',
+                        ),
+                        // initialValue: 'Male',
+                        allowClear: true,
+                        hint: Text('Experience'),
+                        validator: FormBuilderValidators.compose(
+                            [FormBuilderValidators.required(context)]),
+                        items: workExpOptions
+                            .map((location) => DropdownMenuItem(
+                                  value: location,
+                                  child: Text(location),
+                                ))
+                            .toList(),
+                        onChanged: (val) {
+                          setState(() {
+                            _locationHasError = !(_formKey
+                                    .currentState?.fields['workExp']
+                                    ?.validate() ??
+                                false);
+                          });
+                        },
+                        valueTransformer: (val) => val?.toString(),
+                      ),
+                      FormBuilderTextField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        name: 'jobTitle',
+                        decoration: InputDecoration(
+                          labelText: 'Job Title',
+                        ),
+                        onChanged: (val) {
+                          setState(() {
+                            _jobTitleHasError = !(_formKey
+                                    .currentState?.fields['jobTitle']
+                                    ?.validate() ??
+                                false);
+                          });
+                        },
+                        // valueTransformer: (text) => num.tryParse(text),
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(context),
+                          FormBuilderValidators.max(context, 100),
+                        ]),
+                        // initialValue: '12',
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      FormBuilderTextField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        name: 'currentCompanyName',
+                        decoration: InputDecoration(
+                          labelText: 'Current Company Name',
+                        ),
+                        onChanged: (val) {
+                          setState(() {
+                            _currentCompanyNameHasError = !(_formKey
+                                    .currentState?.fields['currentCompanyName']
+                                    ?.validate() ??
+                                false);
+                          });
+                        },
+                        // valueTransformer: (text) => num.tryParse(text),
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(context),
+                          FormBuilderValidators.max(context, 100),
+                        ]),
+                        // initialValue: '12',
+                        keyboardType: TextInputType.name,
+                        textInputAction: TextInputAction.next,
+                      ),
+                      FormBuilderTextField(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        name: 'currentMonthlyIncome',
+                        decoration: InputDecoration(
+                          labelText: 'Current Monthly Income',
+                        ),
+                        onChanged: (val) {
+                          setState(() {
+                            _currentMonthlyIncomeHasError = !(_formKey
+                                    .currentState
+                                    ?.fields['currentMonthlyIncome']
+                                    ?.validate() ??
+                                false);
+                          });
+                        },
+                        // valueTransformer: (text) => num.tryParse(text),
+                        validator: FormBuilderValidators.compose([
+                          FormBuilderValidators.required(context),
+                        ]),
+                        // initialValue: '12',
+                        keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {
-                      _formKey.currentState?.reset();
-                    },
-                    // color: Theme.of(context).colorScheme.secondary,
-                    child: Text(
-                      'Reset',
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: MaterialButton(
+                        color: Theme.of(context).colorScheme.secondary,
+                        onPressed: () {
+                          if (_formKey.currentState?.saveAndValidate() ??
+                              false) {
+                            print(_formKey.currentState?.value);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                                (route) => false);
+                          } else {
+                            print(_formKey.currentState?.value);
+                            print('validation failed');
+                          }
+                        },
+                        child: const Text(
+                          'Submit',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ),
-                  ),
+                    const SizedBox(width: 20),
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () {
+                          _formKey.currentState?.reset();
+                        },
+                        // color: Theme.of(context).colorScheme.secondary,
+                        child: Text(
+                          'Reset',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 }
