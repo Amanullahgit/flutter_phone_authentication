@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: 'Phone Number',
                   prefix: Padding(
                     padding: EdgeInsets.all(4),
-                    child: Text('+1'),
+                    child: Text('+91'),
                   ),
                 ),
                 maxLength: 10,
