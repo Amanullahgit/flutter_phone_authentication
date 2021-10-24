@@ -12,7 +12,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Phone Auth'),
+        title: Text('Dashhire'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,6 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: EdgeInsets.all(4),
                     child: Text('+91'),
                   ),
+                  border: OutlineInputBorder(),
                 ),
                 maxLength: 10,
                 keyboardType: TextInputType.number,

@@ -62,11 +62,15 @@ class OnboardingState extends State<Onboarding> {
                   skipDisabled: true,
                   child: Column(
                     children: <Widget>[
+                      const SizedBox(
+                        height: 10,
+                      ),
                       FormBuilderTextField(
                         autovalidateMode: AutovalidateMode.always,
                         name: 'name',
                         decoration: InputDecoration(
                           labelText: 'Name',
+                          border: OutlineInputBorder(),
                         ),
                         onChanged: (val) {
                           setState(() {
@@ -85,11 +89,15 @@ class OnboardingState extends State<Onboarding> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       FormBuilderDropdown<String>(
                         // autovalidate: true,
                         name: 'location',
                         decoration: InputDecoration(
                           labelText: 'Location',
+                          border: OutlineInputBorder(),
                         ),
                         // initialValue: 'Male',
                         allowClear: true,
@@ -112,11 +120,15 @@ class OnboardingState extends State<Onboarding> {
                         },
                         valueTransformer: (val) => val?.toString(),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       FormBuilderDropdown<String>(
                         // autovalidate: true,
                         name: 'education',
                         decoration: InputDecoration(
                           labelText: 'Education',
+                          border: OutlineInputBorder(),
                         ),
                         // initialValue: 'Male',
                         allowClear: true,
@@ -139,11 +151,15 @@ class OnboardingState extends State<Onboarding> {
                         },
                         valueTransformer: (val) => val?.toString(),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       FormBuilderDropdown<String>(
                         // autovalidate: true,
                         name: 'workExp',
                         decoration: InputDecoration(
                           labelText: 'Total Work Experience',
+                          border: OutlineInputBorder(),
                         ),
                         // initialValue: 'Male',
                         allowClear: true,
@@ -166,11 +182,15 @@ class OnboardingState extends State<Onboarding> {
                         },
                         valueTransformer: (val) => val?.toString(),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       FormBuilderTextField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         name: 'jobTitle',
                         decoration: InputDecoration(
                           labelText: 'Job Title',
+                          border: OutlineInputBorder(),
                         ),
                         onChanged: (val) {
                           setState(() {
@@ -189,11 +209,15 @@ class OnboardingState extends State<Onboarding> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       FormBuilderTextField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         name: 'currentCompanyName',
                         decoration: InputDecoration(
                           labelText: 'Current Company Name',
+                          border: OutlineInputBorder(),
                         ),
                         onChanged: (val) {
                           setState(() {
@@ -212,11 +236,15 @@ class OnboardingState extends State<Onboarding> {
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       FormBuilderTextField(
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         name: 'currentMonthlyIncome',
                         decoration: InputDecoration(
                           labelText: 'Current Monthly Income',
+                          border: OutlineInputBorder(),
                         ),
                         onChanged: (val) {
                           setState(() {
