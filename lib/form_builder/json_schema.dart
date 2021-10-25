@@ -67,7 +67,12 @@ class _CoreFormState extends State<JsonSchema> {
           item['type'] == "Email" ||
           item['type'] == "TextArea" ||
           item['type'] == "TextInput") {
-        listWidget.add(new MyTextField());
+        listWidget.add(new MyTextField(
+          item: item,
+          onChange: onChange,
+          position: count,
+          keyboardTypes: widget.keyboardTypes,
+        ));
       }
 
       // if (item['type'] == "RadioButton") {
@@ -168,7 +173,8 @@ class _CoreFormState extends State<JsonSchema> {
     return FormBuilder(
         key: _formKey,
         // enabled: false,
-        autovalidateMode: AutovalidateMode.disabled,
+        autovalidateMode:
+            formGeneral['autoValidated'] ?? AutovalidateMode.disabled,
         // initialValue: {
         //   'movie_rating': 5,
         //   'best_language': 'Dart',
@@ -181,17 +187,5 @@ class _CoreFormState extends State<JsonSchema> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: jsonToForm(),
         ));
-    // return Form(
-    //   autovalidateMode:
-    //       formGeneral['autoValidated'] ?? AutovalidateMode.disabled,
-    //   key: _formKey,
-    //   child: new Container(
-    //     padding: new EdgeInsets.all(widget.padding ?? 8.0),
-    //     child: new Column(
-    //       crossAxisAlignment: CrossAxisAlignment.stretch,
-    //       children: jsonToForm(),
-    //     ),
-    //   ),
-    // );
   }
 }

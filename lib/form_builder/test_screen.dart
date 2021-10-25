@@ -19,6 +19,13 @@ class _Login extends State<TestLogin> {
         'placeholder': "Enter Your Username",
         'required': true
       },
+      {
+        'key': 'input1',
+        'type': 'Input',
+        'label': 'Name',
+        'placeholder': "Your Name",
+        'required': false
+      },
     ]
   });
   dynamic response;
@@ -44,13 +51,14 @@ class _Login extends State<TestLogin> {
               style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
             ),
             new JsonSchema(
-              decorations: decorations,
+              // decorations: decorations,
               form: form,
               onChanged: (dynamic response) {
+                print("onChange $response");
                 this.response = response;
               },
               actionSave: (data) {
-                print(data);
+                print("data $data");
               },
               autovalidateMode: AutovalidateMode.onUserInteraction,
               buttonSave: new Container(
