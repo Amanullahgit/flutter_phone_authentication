@@ -27,7 +27,6 @@ class _Login extends State<TestLogin> {
         'name': 'location',
         'type': 'Dropdown',
         'labelText': "Select Location",
-        // not work
         'options': ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
         "validation": {
           "required": true,
@@ -37,8 +36,14 @@ class _Login extends State<TestLogin> {
         'name': 'education',
         'type': 'Dropdown',
         'labelText': "Your Education",
-        // not work
-        'options': ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
+        'options': [
+          '10th or below 10th',
+          '12th pass',
+          'Diploma',
+          'ITI',
+          'Graduate',
+          'Post Graduate'
+        ],
         "validation": {
           "required": true,
         },
@@ -47,8 +52,7 @@ class _Login extends State<TestLogin> {
         'name': 'workExp',
         'type': 'Dropdown',
         'labelText': "Total Work Experience",
-        // not work
-        'options': ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
+        'options': ['1 year', '2 year', '3 year', '4 year', '5+ year'],
         "validation": {
           "required": true,
         },
@@ -78,6 +82,7 @@ class _Login extends State<TestLogin> {
         "validation": {
           "required": true,
         },
+        // not work
         "keyboardType": 'number'
       },
     ]

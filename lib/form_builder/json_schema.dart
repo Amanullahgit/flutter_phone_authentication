@@ -39,8 +39,7 @@ class JsonSchema extends StatefulWidget {
 
 class _CoreFormState extends State<JsonSchema> {
   final dynamic formGeneral;
-
-  var locationOptions = ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'];
+  var options = ['loadind'];
   bool _locationHasError = false;
 
   int radioValue;
@@ -92,21 +91,24 @@ class _CoreFormState extends State<JsonSchema> {
           textInputAction: TextInputAction.next,
         ));
       } else if (item['type'] == "Dropdown") {
-        print("optiuons  >> $item");
+        // This conversion is required for dropdown options listing
+        List<dynamic> options = item['options'];
+        List<String> optionsList = options.cast<String>();
+
         // dynamic op = List<String>(item['options']);
-        listWidget.add(FormBuilderDropdown<String>(
+        listWidget.add(new FormBuilderDropdown<String>(
           // autovalidate: true,
           name: item['name'],
           decoration: InputDecoration(
-            labelText: 'Location',
+            labelText: item['labelText'],
             border: OutlineInputBorder(),
           ),
           // initialValue: 'Male',
           allowClear: true,
-          hint: Text('Select Location'),
+          hint: Text('Select options'),
           validator: FormBuilderValidators.compose(
               [FormBuilderValidators.required(context)]),
-          items: locationOptions
+          items: optionsList
               .map((location) => DropdownMenuItem(
                     value: location,
                     child: Text(location),
