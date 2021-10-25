@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:meta/meta.dart';
 
+// JsonSchema can build "a screen" form using json
 class JsonSchema extends StatefulWidget {
   const JsonSchema({
     @required this.form,

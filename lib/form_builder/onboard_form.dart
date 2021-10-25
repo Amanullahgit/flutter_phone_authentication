@@ -5,13 +5,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'json_schema.dart';
 
-class TestLogin extends StatefulWidget {
-  TestLogin({Key key}) : super(key: key);
+class OnboardingScreen extends StatefulWidget {
+  OnboardingScreen({Key key}) : super(key: key);
   @override
-  _Login createState() => new _Login();
+  _OnboardingScreen createState() => new _OnboardingScreen();
 }
 
-class _Login extends State<TestLogin> {
+class _OnboardingScreen extends State<OnboardingScreen> {
   String form = json.encode({
     'fields': [
       {
