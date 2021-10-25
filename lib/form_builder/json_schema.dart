@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:meta/meta.dart';
-import 'components/index.dart';
-// import 'components/simple_date.dart';
-// import 'components/simple_radios.dart';
 
 class JsonSchema extends StatefulWidget {
   const JsonSchema({
@@ -18,6 +15,7 @@ class JsonSchema extends StatefulWidget {
     this.validations = const {},
     this.decorations = const {},
     this.keyboardTypes = const {},
+    // Currently using flutter_form_builder function
     this.buttonSave,
     this.actionSave,
   });
@@ -42,7 +40,17 @@ class JsonSchema extends StatefulWidget {
 class _CoreFormState extends State<JsonSchema> {
   final dynamic formGeneral;
 
+  var locationOptions = ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'];
+  bool _locationHasError = false;
+
   int radioValue;
+
+  // List<FormFieldValidator> validators() {
+  //   List<FormFieldValidator> listValidator = [];
+  //   if (formGeneral?.validation?.required) {
+
+  //   }
+  // }
 
   List<Widget> jsonToForm() {
     List<Widget> listWidget = new List<Widget>();
@@ -60,7 +68,7 @@ class _CoreFormState extends State<JsonSchema> {
     }
 
     for (var count = 0; count < formGeneral['fields'].length; count++) {
-      listWidget.add(const SizedBox(height: 20));
+      listWidget.add(const SizedBox(height: 15));
 
       Map item = formGeneral['fields'][count];
 
@@ -79,72 +87,41 @@ class _CoreFormState extends State<JsonSchema> {
           },
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(context),
-            FormBuilderValidators.max(context, 100),
           ]),
           keyboardType: TextInputType.name,
           textInputAction: TextInputAction.next,
         ));
+      } else if (item['type'] == "Dropdown") {
+        print("optiuons  >> $item");
+        // dynamic op = List<String>(item['options']);
+        listWidget.add(FormBuilderDropdown<String>(
+          // autovalidate: true,
+          name: item['name'],
+          decoration: InputDecoration(
+            labelText: 'Location',
+            border: OutlineInputBorder(),
+          ),
+          // initialValue: 'Male',
+          allowClear: true,
+          hint: Text('Select Location'),
+          validator: FormBuilderValidators.compose(
+              [FormBuilderValidators.required(context)]),
+          items: locationOptions
+              .map((location) => DropdownMenuItem(
+                    value: location,
+                    child: Text(location),
+                  ))
+              .toList(),
+          onChanged: (val) {
+            setState(() {
+              _locationHasError =
+                  !(_formKey.currentState?.fields['location']?.validate() ??
+                      false);
+            });
+          },
+          valueTransformer: (val) => val?.toString(),
+        ));
       }
-
-      // if (item['type'] == "RadioButton") {
-      //   listWidget.add(new SimpleRadios(
-      //     item: item,
-      //     onChange: onChange,
-      //     position: count,
-      //     decorations: widget.decorations,
-      //     errorMessages: widget.errorMessages,
-      //     validations: widget.validations,
-      //     keyboardTypes: widget.keyboardTypes,
-      //   ));
-      // }
-
-      // if (item['type'] == "Switch") {
-      //   listWidget.add(new SimpleSwitch(
-      //     item: item,
-      //     onChange: onChange,
-      //     position: count,
-      //     decorations: widget.decorations,
-      //     errorMessages: widget.errorMessages,
-      //     validations: widget.validations,
-      //     keyboardTypes: widget.keyboardTypes,
-      //   ));
-      // }
-
-      // if (item['type'] == "Checkbox") {
-      //   listWidget.add(new SimpleListCheckbox(
-      //     item: item,
-      //     onChange: onChange,
-      //     position: count,
-      //     decorations: widget.decorations,
-      //     errorMessages: widget.errorMessages,
-      //     validations: widget.validations,
-      //     keyboardTypes: widget.keyboardTypes,
-      //   ));
-      // }
-
-      // if (item['type'] == "Select") {
-      //   listWidget.add(new SimpleSelect(
-      //     item: item,
-      //     onChange: onChange,
-      //     position: count,
-      //     decorations: widget.decorations,
-      //     errorMessages: widget.errorMessages,
-      //     validations: widget.validations,
-      //     keyboardTypes: widget.keyboardTypes,
-      //   ));
-      // }
-
-      // if (item['type'] == "Date") {
-      //   listWidget.add(new SimpleDate(
-      //     item: item,
-      //     onChange: onChange,
-      //     position: count,
-      //     decorations: widget.decorations,
-      //     errorMessages: widget.errorMessages,
-      //     validations: widget.validations,
-      //     keyboardTypes: widget.keyboardTypes,
-      //   ));
-      // }
     }
 
     if (widget.buttonSave != null) {
@@ -184,36 +161,39 @@ class _CoreFormState extends State<JsonSchema> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[
-      FormBuilder(
-          key: _formKey,
-          // enabled: false,
-          autovalidateMode:
-              formGeneral['autoValidated'] ?? AutovalidateMode.disabled,
-          skipDisabled: true,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: jsonToForm(),
-          )),
-      MaterialButton(
-        color: Theme.of(context).colorScheme.secondary,
-        onPressed: () {
-          if (_formKey.currentState?.saveAndValidate() ?? false) {
-            print(_formKey.currentState?.value);
-            // Navigator.pushAndRemoveUntil(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => Home()),
-            //     (route) => false);
-          } else {
-            print(_formKey.currentState?.value);
-            print('validation failed');
-          }
-        },
-        child: const Text(
-          'Submit',
-          style: TextStyle(color: Colors.white),
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(children: <Widget>[
+        FormBuilder(
+            key: _formKey,
+            // enabled: false,
+            autovalidateMode:
+                formGeneral['autoValidated'] ?? AutovalidateMode.disabled,
+            skipDisabled: true,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: jsonToForm(),
+            )),
+        MaterialButton(
+          color: Theme.of(context).colorScheme.secondary,
+          onPressed: () {
+            if (_formKey.currentState?.saveAndValidate() ?? false) {
+              print(_formKey.currentState?.value);
+              // Navigator.pushAndRemoveUntil(
+              //     context,
+              //     MaterialPageRoute(builder: (context) => Home()),
+              //     (route) => false);
+            } else {
+              print(_formKey.currentState?.value);
+              print('validation failed');
+            }
+          },
+          child: const Text(
+            'Submit',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
-      ),
-    ]);
+      ]),
+    );
   }
 }
