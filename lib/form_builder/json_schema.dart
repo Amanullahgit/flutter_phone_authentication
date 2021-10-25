@@ -19,6 +19,7 @@ class JsonSchema extends StatefulWidget {
     // Currently using flutter_form_builder function
     this.buttonSave,
     this.actionSave,
+    this.onSubmitSave,
   });
 
   final Map errorMessages;
@@ -30,6 +31,7 @@ class JsonSchema extends StatefulWidget {
   final double padding;
   final Widget buttonSave;
   final Function actionSave;
+  final Function onSubmitSave;
   final ValueChanged<dynamic> onChanged;
   final AutovalidateMode autovalidateMode;
 
@@ -127,19 +129,19 @@ class _CoreFormState extends State<JsonSchema> {
       }
     }
 
-    if (widget.buttonSave != null) {
-      listWidget.add(new Container(
-        margin: EdgeInsets.only(top: 10.0),
-        child: InkWell(
-          onTap: () {
-            if (_formKey.currentState.validate()) {
-              widget.actionSave(formGeneral);
-            }
-          },
-          child: widget.buttonSave,
-        ),
-      ));
-    }
+    // if (widget.buttonSave != null) {
+    //   listWidget.add(new Container(
+    //     margin: EdgeInsets.only(top: 10.0),
+    //     child: InkWell(
+    //       onTap: () {
+    //         if (_formKey.currentState.validate()) {
+    //           widget.actionSave(formGeneral);
+    //         }
+    //       },
+    //       child: widget.buttonSave,
+    //     ),
+    //   ));
+    // }
 
     return listWidget;
   }
@@ -182,6 +184,7 @@ class _CoreFormState extends State<JsonSchema> {
           onPressed: () {
             if (_formKey.currentState?.saveAndValidate() ?? false) {
               print(_formKey.currentState?.value);
+              print(widget.onSubmitSave(context));
               // Navigator.pushAndRemoveUntil(
               //     context,
               //     MaterialPageRoute(builder: (context) => Home()),

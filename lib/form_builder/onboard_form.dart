@@ -100,6 +100,12 @@ class _OnboardingScreen extends State<OnboardingScreen> {
           child: new Column(children: <Widget>[
             new JsonSchema(
               form: form,
+              onSubmitSave: (dynamic response) {
+                print("passed onSubmitSave---- $response");
+
+                // Control action after submit button click
+              },
+              // Currently required; but not yet used
               onChanged: (dynamic response) {
                 print("passed onChange---- $response");
                 // User get json with values
