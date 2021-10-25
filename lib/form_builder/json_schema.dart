@@ -60,18 +60,29 @@ class _CoreFormState extends State<JsonSchema> {
     }
 
     for (var count = 0; count < formGeneral['fields'].length; count++) {
+      listWidget.add(const SizedBox(height: 20));
+
       Map item = formGeneral['fields'][count];
 
-      if (item['type'] == "Input" ||
-          item['type'] == "Password" ||
-          item['type'] == "Email" ||
-          item['type'] == "TextArea" ||
-          item['type'] == "TextInput") {
-        listWidget.add(new MyTextField(
-          item: item,
-          onChange: onChange,
-          position: count,
-          keyboardTypes: widget.keyboardTypes,
+      if (item['type'] == "TextInput") {
+        listWidget.add(new FormBuilderTextField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          name: item['name'],
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: item['labelText'],
+            // helperText: 'Helper text',
+            // hintText: 'Hint text',
+          ),
+          onChanged: (val) {
+            print("val $val");
+          },
+          validator: FormBuilderValidators.compose([
+            FormBuilderValidators.required(context),
+            FormBuilderValidators.max(context, 100),
+          ]),
+          keyboardType: TextInputType.name,
+          textInputAction: TextInputAction.next,
         ));
       }
 
@@ -160,6 +171,9 @@ class _CoreFormState extends State<JsonSchema> {
   }
 
   void onChange(int position, dynamic value) {
+    // print("_formKey");
+    // print(_formKey.currentState?.fields['lastCompany']);
+
     this.setState(() {
       formGeneral['fields'][position]['value'] = value;
       this._handleChanged();
@@ -170,22 +184,36 @@ class _CoreFormState extends State<JsonSchema> {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilder(
-        key: _formKey,
-        // enabled: false,
-        autovalidateMode:
-            formGeneral['autoValidated'] ?? AutovalidateMode.disabled,
-        // initialValue: {
-        //   'movie_rating': 5,
-        //   'best_language': 'Dart',
-        //   '': '13',
-        //   'location': 'Bengalure',
-        //   'workExp': '3 year',
-        // },
-        skipDisabled: true,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: jsonToForm(),
-        ));
+    return Column(children: <Widget>[
+      FormBuilder(
+          key: _formKey,
+          // enabled: false,
+          autovalidateMode:
+              formGeneral['autoValidated'] ?? AutovalidateMode.disabled,
+          skipDisabled: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: jsonToForm(),
+          )),
+      MaterialButton(
+        color: Theme.of(context).colorScheme.secondary,
+        onPressed: () {
+          if (_formKey.currentState?.saveAndValidate() ?? false) {
+            print(_formKey.currentState?.value);
+            // Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => Home()),
+            //     (route) => false);
+          } else {
+            print(_formKey.currentState?.value);
+            print('validation failed');
+          }
+        },
+        child: const Text(
+          'Submit',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    ]);
   }
 }
