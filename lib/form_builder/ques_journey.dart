@@ -54,8 +54,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text("Test"),
-        ),
+            title: new Text("Test"), automaticallyImplyLeading: true),
         body: new SingleChildScrollView(
             child: new Center(
                 child: new Column(children: <Widget>[
@@ -68,17 +67,14 @@ class _QuestionJourneyState extends State<QuestionJourney> {
                 // This condition should be tight
                 // When screenIndex == _getScreenCount() index error occur
                 if (widget.screenIndex == _getScreenCount() - 1) {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => new Congrates()),
-                      (route) => false);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => new Congrates()));
                 } else {
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => new QuestionJourney(
-                              screenIndex: widget.screenIndex + 1)),
-                      (route) => false);
+                              screenIndex: widget.screenIndex + 1)));
                 }
               },
               form: _getFormScreen()),
