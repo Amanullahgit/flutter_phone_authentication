@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 class JsonSchema extends StatefulWidget {
   const JsonSchema({
     @required this.form,
-    @required this.onChanged,
+    this.onChanged,
     this.padding,
     this.formMap,
     this.autovalidateMode,

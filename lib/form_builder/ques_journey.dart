@@ -15,77 +15,126 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
+import './json_schema.dart';
+
 // QuestionJourney extends Journey
 // In future there can be other journeys that can be extracted from Journey class
 class QuestionJourney extends StatefulWidget {
-  QuestionJourney({Key key, @required this.index}) : super(key: key);
+  QuestionJourney({Key key, this.screenIndex});
 
-  final int index;
+  final int screenIndex;
 
   @override
   _QuestionJourneyState createState() => _QuestionJourneyState();
 }
 
 class _QuestionJourneyState extends State<QuestionJourney> {
-  String journey = json.encode({
-    'screens': [
-      {
-        'fields': [
-          {
-            'name': 'name',
-            'type': 'TextInput',
-            'labelText': "Enter your Name",
-            // not work
-            "validation": {
-              "required": true,
-            }
-          }
-        ]
-      },
-      {
-        'fields': [
-          {
-            'name': 'location',
-            'type': 'Dropdown',
-            'labelText': "Select Location",
-            'options': ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
-            "validation": {
-              "required": true,
-            },
-          }
-        ]
-      },
-      {
-        'fields': [
-          {
-            'name': 'education',
-            'type': 'Dropdown',
-            'labelText': "Your Education",
-            'options': [
-              '10th or below 10th',
-              '12th pass',
-              'Diploma',
-              'ITI',
-              'Graduate',
-              'Post Graduate'
-            ],
-            "validation": {
-              "required": true,
-            },
-          }
-        ]
-      },
-    ]
-  });
+  String journey;
+  dynamic response;
+
+  // // Make a method: params: journey and index
+  // // return: JsonSchema(onSubmitSave: implement<Navigation>, form: implement<journey json>)
+  // JsonSchema getFormInScreen() {
+  //   final screenIndex = widget.screenIndex;
+  //   // journey is defined
+
+  //   final form = json.decode(journey)['screens'][screenIndex];
+
+  //   return JsonSchema(form: form);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return new Scaffold(
+        appBar: new AppBar(
+          title: new Text("Test"),
+        ),
+        body: new SingleChildScrollView(
+            child: new Center(
+                child: new Column(children: <Widget>[
+          JsonSchema(
+              onSubmitSave: (dynamic response) {
+                print("passed onSubmitSave---- $response");
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            new QuestionJourney(screenIndex: 1)),
+                    (route) => false);
+                // Control action after submit button click
+              },
+              form: json.encode({
+                'fields': [
+                  {
+                    'name': 'name',
+                    'type': 'TextInput',
+                    'labelText': "Enter your Name",
+                    // not work
+                    "validation": {
+                      "required": true,
+                    }
+                  },
+                ]
+              }))
+        ]))));
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    journey = json.encode({
+      'timeLimit': 60,
+      'screens': [
+        // 1st screen
+        {
+          'fields': [
+            {
+              'name': 'name',
+              'type': 'TextInput',
+              'labelText': "Enter your Name",
+              // not work
+              "validation": {
+                "required": true,
+              }
+            }
+          ]
+        },
+        // 2nd screen
+        {
+          'fields': [
+            {
+              'name': 'location',
+              'type': 'Dropdown',
+              'labelText': "Select Location",
+              'options': ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
+              "validation": {
+                "required": true,
+              },
+            }
+          ]
+        },
+        // {
+        //   'fields': [
+        //     {
+        //       'name': 'education',
+        //       'type': 'Dropdown',
+        //       'labelText': "Your Education",
+        //       'options': [
+        //         '10th or below 10th',
+        //         '12th pass',
+        //         'Diploma',
+        //         'ITI',
+        //         'Graduate',
+        //         'Post Graduate'
+        //       ],
+        //       "validation": {
+        //         "required": true,
+        //       },
+        //     }
+        //   ]
+        // },
+      ]
+    });
   }
 }
