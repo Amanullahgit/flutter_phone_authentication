@@ -16,6 +16,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import './json_schema.dart';
+import '../congrates.dart';
 
 // QuestionJourney extends Journey
 // In future there can be other journeys that can be extracted from Journey class
@@ -34,14 +35,20 @@ class _QuestionJourneyState extends State<QuestionJourney> {
 
   // // Make a method: params: journey and index
   // // return: JsonSchema(onSubmitSave: implement<Navigation>, form: implement<journey json>)
-  // JsonSchema getFormInScreen() {
-  //   final screenIndex = widget.screenIndex;
-  //   // journey is defined
+  String _getFormScreen() {
+    final screenIndex = widget.screenIndex;
+    // journey is defined
 
-  //   final form = json.decode(journey)['screens'][screenIndex];
+    final form = json.decode(journey)['screens'][screenIndex];
 
-  //   return JsonSchema(form: form);
-  // }
+    return json.encode(form);
+  }
+
+  int _getScreenCount() {
+    final screenCount = json.decode(journey)['screens'].length;
+
+    return screenCount;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,28 +61,27 @@ class _QuestionJourneyState extends State<QuestionJourney> {
                 child: new Column(children: <Widget>[
           JsonSchema(
               onSubmitSave: (dynamic response) {
-                print("passed onSubmitSave---- $response");
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            new QuestionJourney(screenIndex: 1)),
-                    (route) => false);
-                // Control action after submit button click
+                // print("passed onSubmitSave---- $response");
+                // print(widget.screenIndex);
+                // print(_getScreenCount());
+
+                // This condition should be tight
+                // When screenIndex == _getScreenCount() index error occur
+                if (widget.screenIndex == _getScreenCount() - 1) {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => new Congrates()),
+                      (route) => false);
+                } else {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => new QuestionJourney(
+                              screenIndex: widget.screenIndex + 1)),
+                      (route) => false);
+                }
               },
-              form: json.encode({
-                'fields': [
-                  {
-                    'name': 'name',
-                    'type': 'TextInput',
-                    'labelText': "Enter your Name",
-                    // not work
-                    "validation": {
-                      "required": true,
-                    }
-                  },
-                ]
-              }))
+              form: _getFormScreen()),
         ]))));
   }
 
@@ -88,6 +94,8 @@ class _QuestionJourneyState extends State<QuestionJourney> {
       'screens': [
         // 1st screen
         {
+          // define other params in screen
+          'quesion': "Question placeholder",
           'fields': [
             {
               'name': 'name',
@@ -114,26 +122,26 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             }
           ]
         },
-        // {
-        //   'fields': [
-        //     {
-        //       'name': 'education',
-        //       'type': 'Dropdown',
-        //       'labelText': "Your Education",
-        //       'options': [
-        //         '10th or below 10th',
-        //         '12th pass',
-        //         'Diploma',
-        //         'ITI',
-        //         'Graduate',
-        //         'Post Graduate'
-        //       ],
-        //       "validation": {
-        //         "required": true,
-        //       },
-        //     }
-        //   ]
-        // },
+        {
+          'fields': [
+            {
+              'name': 'education',
+              'type': 'Dropdown',
+              'labelText': "Your Education",
+              'options': [
+                '10th or below 10th',
+                '12th pass',
+                'Diploma',
+                'ITI',
+                'Graduate',
+                'Post Graduate'
+              ],
+              "validation": {
+                "required": true,
+              },
+            }
+          ]
+        },
       ]
     });
   }
