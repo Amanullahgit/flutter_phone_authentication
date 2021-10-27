@@ -1,8 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'login.dart';
-import './onboard/onboard_form.dart';
+// import './onboard/onboard_form.dart';
+// import 'home.dart';
+// import 'home_list.dart';
+
+// OnboardingScreen
+// import 'congrates.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
