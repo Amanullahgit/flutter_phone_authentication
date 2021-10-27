@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'json_schema.dart';
+import '../home_list.dart';
 
 class OnboardingScreen extends StatefulWidget {
   OnboardingScreen({Key key}) : super(key: key);
@@ -103,14 +104,11 @@ class _OnboardingScreen extends State<OnboardingScreen> {
               onSubmitSave: (dynamic response) {
                 print("passed onSubmitSave---- $response");
 
-                // Control action after submit button click
-              },
-              // Currently required; but not yet used
-              onChanged: (dynamic response) {
-                print("passed onChange---- $response");
-                // User get json with values
-                // Called everytime any field is being changed
-                //response: {fields: [{key: input1, name: username, type: Input, label: Username, placeholder: Enter Your Username, required: true, value: masih}, {key: input1, name: lastCompany, type: Input, label: Name, placeholder: Last Company Name, required: false, value: chqbook2}]}
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                );
+
                 this.response = response;
               },
             ),

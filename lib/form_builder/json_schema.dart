@@ -182,13 +182,12 @@ class _CoreFormState extends State<JsonSchema> {
         MaterialButton(
           color: Theme.of(context).colorScheme.secondary,
           onPressed: () {
+            //TODO: Write better success and faliure on submit button clicked
             if (_formKey.currentState?.saveAndValidate() ?? false) {
               print(_formKey.currentState?.value);
-              print(widget.onSubmitSave(context));
-              // Navigator.pushAndRemoveUntil(
-              //     context,
-              //     MaterialPageRoute(builder: (context) => Home()),
-              //     (route) => false);
+
+              // On submit button pressed
+              widget.onSubmitSave(context);
             } else {
               print(_formKey.currentState?.value);
               print('validation failed');

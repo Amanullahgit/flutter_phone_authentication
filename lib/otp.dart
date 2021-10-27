@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:phone_auth_project/home.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'form_builder/onboard_form.dart';
 
@@ -91,7 +90,7 @@ class _OTPScreenState extends State<OTPScreen> {
             if (value.user != null) {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => Home()),
+                  MaterialPageRoute(builder: (context) => OnboardingScreen()),
                   (route) => false);
             }
           });
