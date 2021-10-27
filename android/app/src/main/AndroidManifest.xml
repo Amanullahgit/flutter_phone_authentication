@@ -9,7 +9,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="phone_auth_project"
+        android:label="dashhire"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
