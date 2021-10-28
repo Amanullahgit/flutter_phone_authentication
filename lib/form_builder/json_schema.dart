@@ -74,6 +74,8 @@ class _CoreFormState extends State<JsonSchema> {
           formGeneral['question']['source'],
           style: new TextStyle(fontSize: 16.0, fontStyle: FontStyle.normal),
         ));
+      } else if (formGeneral['question']['type'] == 'Image') {
+        listWidget.add(Image.network(formGeneral['question']['source']));
       }
     }
 

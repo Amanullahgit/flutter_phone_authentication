@@ -157,6 +157,63 @@ class _QuestionJourneyState extends State<QuestionJourney> {
         {
           'question': {
             'source':
+                'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441627/questions/q4_nehbqa.png',
+            'type': 'Image',
+          },
+          'mark': 10,
+          'fields': [
+            {
+              'name': 'q4',
+              'type': 'TextInput',
+              'labelText': "",
+              // not work
+              "validation": {
+                "required": true,
+              }
+            }
+          ]
+        },
+        {
+          'question': {
+            'source':
+                'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441627/questions/q5_ogi2xz.png',
+            'type': 'Image',
+          },
+          'mark': 10,
+          'fields': [
+            {
+              'name': 'q5',
+              'type': 'TextInput',
+              'labelText': "",
+              // not work
+              "validation": {
+                "required": true,
+              }
+            }
+          ]
+        },
+        {
+          'question': {
+            'source':
+                'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441627/questions/q6_amfqhw.png',
+            'type': 'Image',
+          },
+          'mark': 10,
+          'fields': [
+            {
+              'name': 'q6',
+              'type': 'TextInput',
+              'labelText': "",
+              // not work
+              "validation": {
+                "required": true,
+              }
+            }
+          ]
+        },
+        {
+          'question': {
+            'source':
                 'Ram has 10 books. Sham gave him 15 books. Ghanshyam also gave him 23 books. How many total books Ram has now?',
             'type': 'Text',
           },
@@ -184,6 +241,25 @@ class _QuestionJourneyState extends State<QuestionJourney> {
               'type': 'Radio',
               'labelText': "",
               'options': ['Paste', 'New file', 'Delete', 'Undo'],
+              // not work
+              "validation": {
+                "required": true,
+              }
+            }
+          ]
+        },
+        {
+          'question': {
+            'source':
+                'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441630/questions/q9_tddqsm.png',
+            'type': 'Image',
+          },
+          'mark': 10,
+          'fields': [
+            {
+              'name': 'q9',
+              'type': 'TextInput',
+              'labelText': "",
               // not work
               "validation": {
                 "required": true,
