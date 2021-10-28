@@ -69,10 +69,12 @@ class _CoreFormState extends State<JsonSchema> {
     listWidget.add(const SizedBox(height: 15));
 
     if (formGeneral['question'] != null) {
-      listWidget.add(Text(
-        formGeneral['question'],
-        style: new TextStyle(fontSize: 16.0, fontStyle: FontStyle.normal),
-      ));
+      if (formGeneral['question']['type'] == 'Text') {
+        listWidget.add(Text(
+          formGeneral['question']['source'],
+          style: new TextStyle(fontSize: 16.0, fontStyle: FontStyle.normal),
+        ));
+      }
     }
 
     for (var count = 0; count < formGeneral['fields'].length; count++) {

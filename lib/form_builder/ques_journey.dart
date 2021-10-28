@@ -95,7 +95,10 @@ class _QuestionJourneyState extends State<QuestionJourney> {
         // 1st screen
         {
           // define other params in screen
-          'question': "Find the number of A in BBBAAAACCCAADDDDDAeeeeeA",
+          'question': {
+            'source': "Find the number of A in BBBAAAACCCAADDDDDAeeeeeA",
+            'type': 'Text'
+          },
           'mark': 10,
           // calculate question's answer mark in Widget; update _score
           'fields': [
@@ -113,38 +116,98 @@ class _QuestionJourneyState extends State<QuestionJourney> {
         },
         // 2nd screen
         {
-          'question': "Put your quesion here",
+          'question': {
+            'source': "7 * 11 -9 is equal to",
+            'type': 'Text',
+          },
           'mark': 10,
           'fields': [
             {
-              'name': 'location',
-              'type': 'Dropdown',
-              'labelText': "Select Location",
-              'options': ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
+              'name': 'q2',
+              'type': 'Radio',
+              'labelText': "",
+              'options': ['14', '9', '68', '36'],
+              // not work
               "validation": {
                 "required": true,
-              },
+              }
             }
           ]
         },
         {
+          'question': {
+            'source':
+                "Pack of 1 box has 10 cigarette, Pack of _____ = 120 cigarette Fill in the blanks with right value",
+            'type': 'Text',
+          },
+          'mark': 10,
           'fields': [
             {
-              'question': "Put your quesion here",
-              'name': 'education',
-              'type': 'Dropdown',
-              'labelText': "Your Education",
-              'options': [
-                '10th or below 10th',
-                '12th pass',
-                'Diploma',
-                'ITI',
-                'Graduate',
-                'Post Graduate'
-              ],
+              'name': 'q3',
+              'type': 'Radio',
+              'labelText': "",
+              'options': ['10', '100', '12', '1.2'],
+              // not work
               "validation": {
                 "required": true,
-              },
+              }
+            }
+          ]
+        },
+        {
+          'question': {
+            'source':
+                'Ram has 10 books. Sham gave him 15 books. Ghanshyam also gave him 23 books. How many total books Ram has now?',
+            'type': 'Text',
+          },
+          'fields': [
+            {
+              'name': 'q7',
+              'type': 'TextInput',
+              //  'labelText': "Job Title",
+              // not work
+              "validation": {
+                "required": true,
+              }
+            },
+          ]
+        },
+        {
+          'question': {
+            'source': 'Ctrl + Z is shortcut for',
+            'type': 'Text',
+          },
+          'mark': 10,
+          'fields': [
+            {
+              'name': 'q8',
+              'type': 'Radio',
+              'labelText': "",
+              'options': ['Paste', 'New file', 'Delete', 'Undo'],
+              // not work
+              "validation": {
+                "required": true,
+              }
+            }
+          ]
+        },
+        {
+          'question': {
+            'source':
+                '"My name are Rohan and I have two children". What is wrong in this statement?',
+            'type': 'Text',
+          },
+          'mark': 10,
+          'fields': [
+            {
+              'name': 'q10',
+              'type': 'Radio',
+              'labelText': "",
+              'options': ['My name', 'Children', 'are', 'I have'],
+              // not work
+              "validation": {
+                "required": true,
+              }
             }
           ]
         },
