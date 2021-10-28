@@ -4,7 +4,23 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:meta/meta.dart';
 
-// JsonSchema can build "a screen" form using json
+// INFO: JsonSchema can build "a screen" form using json
+// Valid input json, that JsonSchema operated on
+// {
+//   'question': "Put your quesion here",
+//   'mark': 10,
+//   'fields': [
+//     {
+//       'name': 'location',
+//       'type': 'Dropdown',
+//       'labelText': "Select Location",
+//       'options': ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
+//       "validation": {
+//         "required": true,
+//       },
+//     }
+//   ]
+// }
 class JsonSchema extends StatefulWidget {
   const JsonSchema({
     @required this.form,
@@ -47,25 +63,15 @@ class _CoreFormState extends State<JsonSchema> {
 
   int radioValue;
 
-  // List<FormFieldValidator> validators() {
-  //   List<FormFieldValidator> listValidator = [];
-  //   if (formGeneral?.validation?.required) {
-
-  //   }
-  // }
-
   List<Widget> jsonToForm() {
     List<Widget> listWidget = new List<Widget>();
-    if (formGeneral['title'] != null) {
+
+    listWidget.add(const SizedBox(height: 15));
+
+    if (formGeneral['question'] != null) {
       listWidget.add(Text(
-        formGeneral['title'],
-        style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-      ));
-    }
-    if (formGeneral['description'] != null) {
-      listWidget.add(Text(
-        formGeneral['description'],
-        style: new TextStyle(fontSize: 14.0, fontStyle: FontStyle.italic),
+        formGeneral['question'],
+        style: new TextStyle(fontSize: 16.0, fontStyle: FontStyle.normal),
       ));
     }
 
@@ -126,22 +132,27 @@ class _CoreFormState extends State<JsonSchema> {
           },
           valueTransformer: (val) => val?.toString(),
         ));
+      } else if (item['type'] == "Radio") {
+        // This conversion is required for dropdown options listing
+        List<dynamic> options = item['options'];
+        List<String> optionsList = options.cast<String>();
+
+        listWidget.add(FormBuilderRadioGroup<String>(
+          initialValue: null,
+          name: item['name'],
+          // onChanged: _onChanged,
+          validator: FormBuilderValidators.compose(
+              [FormBuilderValidators.required(context)]),
+          options: optionsList
+              .map((lang) => FormBuilderFieldOption(
+                    value: lang,
+                    child: Text(lang),
+                  ))
+              .toList(growable: false),
+          controlAffinity: ControlAffinity.trailing,
+        ));
       }
     }
-
-    // if (widget.buttonSave != null) {
-    //   listWidget.add(new Container(
-    //     margin: EdgeInsets.only(top: 10.0),
-    //     child: InkWell(
-    //       onTap: () {
-    //         if (_formKey.currentState.validate()) {
-    //           widget.actionSave(formGeneral);
-    //         }
-    //       },
-    //       child: widget.buttonSave,
-    //     ),
-    //   ));
-    // }
 
     return listWidget;
   }
@@ -163,12 +174,14 @@ class _CoreFormState extends State<JsonSchema> {
   }
 
   final _formKey = GlobalKey<FormBuilderState>();
+  // String question = "";
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(children: <Widget>[
+        // Text(question),
         FormBuilder(
             key: _formKey,
             // enabled: false,

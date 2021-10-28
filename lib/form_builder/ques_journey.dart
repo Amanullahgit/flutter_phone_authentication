@@ -85,18 +85,25 @@ class _QuestionJourneyState extends State<QuestionJourney> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    // NOTE: on each screen try getting the result on questions and score (try evaluating answers on submit)
+    // ex. say screen 1 have 2 question. On screen calculate the partial score and update _score in Provider
+
     journey = json.encode({
       'timeLimit': 60,
       'screens': [
         // 1st screen
         {
           // define other params in screen
-          'quesion': "Question placeholder",
+          'question': "Find the number of A in BBBAAAACCCAADDDDDAeeeeeA",
+          'mark': 10,
+          // calculate question's answer mark in Widget; update _score
           'fields': [
             {
-              'name': 'name',
-              'type': 'TextInput',
-              'labelText': "Enter your Name",
+              'name': 'q1',
+              'type': 'Radio',
+              'labelText': "",
+              'options': ['7', '8', '6', '5'],
               // not work
               "validation": {
                 "required": true,
@@ -106,6 +113,8 @@ class _QuestionJourneyState extends State<QuestionJourney> {
         },
         // 2nd screen
         {
+          'question': "Put your quesion here",
+          'mark': 10,
           'fields': [
             {
               'name': 'location',
@@ -121,6 +130,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
         {
           'fields': [
             {
+              'question': "Put your quesion here",
               'name': 'education',
               'type': 'Dropdown',
               'labelText': "Your Education",
