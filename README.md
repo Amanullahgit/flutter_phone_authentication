@@ -21,3 +21,9 @@ For Step By Step Guide Follow Video Tutorial:
 
 Feel Free to copy the code and use it.<br><br>
 Don't forget to star the repo and like the video :)
+
+# Make Form - Journey
+
+Create forms using JsonSchema. Iterate over JsonSchema to create Journey. Use Provider to maintain journey state.
+
+Feel free to use this in your peoject!
