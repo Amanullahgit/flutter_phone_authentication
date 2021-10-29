@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:provider/provider.dart';
 
 import 'package:meta/meta.dart';
+import './../models/eligibility.dart';
 
 // INFO: JsonSchema can build "a screen" form using json
 // Valid input json, that JsonSchema operated on
@@ -24,6 +26,7 @@ import 'package:meta/meta.dart';
 class JsonSchema extends StatefulWidget {
   const JsonSchema({
     @required this.form,
+    @required this.onSubmitSave,
     this.onChanged,
     this.padding,
     this.formMap,
@@ -35,7 +38,6 @@ class JsonSchema extends StatefulWidget {
     // Currently using flutter_form_builder function
     this.buttonSave,
     this.actionSave,
-    this.onSubmitSave,
   });
 
   final Map errorMessages;
@@ -182,6 +184,10 @@ class _CoreFormState extends State<JsonSchema> {
 
   @override
   Widget build(BuildContext context) {
+    // INFO: Works but not a good place to declare
+    // final model = Provider.of<ExamEvaluateModal>(context);
+    // print("model $model");
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(children: <Widget>[
@@ -202,6 +208,9 @@ class _CoreFormState extends State<JsonSchema> {
             //TODO: Write better success and faliure on submit button clicked
             if (_formKey.currentState?.saveAndValidate() ?? false) {
               print(_formKey.currentState?.value);
+
+              // INFO: provider, use setter to change Modal value
+              context.read<ExamEvaluateModal>().increment();
 
               // On submit button pressed
               widget.onSubmitSave(context);

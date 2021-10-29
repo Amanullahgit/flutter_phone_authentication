@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import './form_builder/ques_journey.dart';
+import './models/eligibility.dart';
+import 'package:provider/provider.dart';
 
 class Congrates extends StatefulWidget {
   @override
@@ -15,7 +17,13 @@ class _CongratesState extends State<Congrates> {
       appBar: AppBar(
         title: Text('Result'),
       ),
-      body: Center(child: Text("Congrates")),
+      body: Column(
+        children: [
+          Center(child: Text('${context.watch<ExamEvaluateModal>().count}')),
+          Text(
+              'Congrates, You have completed the test. Our executive will reach you')
+        ],
+      ),
     );
   }
 
@@ -23,5 +31,7 @@ class _CongratesState extends State<Congrates> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
+    final mark = 30;
   }
 }

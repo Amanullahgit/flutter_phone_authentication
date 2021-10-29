@@ -42,12 +42,12 @@ class _HomeState extends State<Home> {
                     MaterialButton(
                       color: Theme.of(context).colorScheme.secondary,
                       onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    new QuestionJourney(screenIndex: 0)),
-                            (route) => false);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  new QuestionJourney(screenIndex: 0)),
+                        );
                       },
                       child: const Text(
                         'Start Test',
