@@ -18,6 +18,7 @@ class ExamEvaluateModal with ChangeNotifier {
 
   // INFO: consider field {answer} , match user's 'ans' with field answer and allocate mark
   void assignMark(Map field, String ans) {
+    // INFO: start evaluating answer when, question comes with answer
     if (field.containsKey('answer')) {
       String answer = field['answer'];
 

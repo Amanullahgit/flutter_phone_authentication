@@ -192,10 +192,6 @@ class _CoreFormState extends State<JsonSchema> {
 
   @override
   Widget build(BuildContext context) {
-    // INFO: Works but not a good place to declare
-    // final model = Provider.of<ExamEvaluateModal>(context);
-    // print("model $model");
-
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(children: <Widget>[
@@ -234,6 +230,10 @@ class _CoreFormState extends State<JsonSchema> {
                 // calculate total mark
                 context.read<ExamEvaluateModal>().markScored();
                 print(context.read<ExamEvaluateModal>().question_answer_mark);
+
+                // INFO: Works but not a good place to declare
+                // final model = Provider.of<ExamEvaluateModal>(context);
+                // print("mode l $model");
               });
 
               // On submit button pressed
