@@ -162,7 +162,8 @@ class _CoreFormState extends State<JsonSchema> {
                     child: Text(lang),
                   ))
               .toList(growable: false),
-          controlAffinity: ControlAffinity.trailing,
+          controlAffinity: ControlAffinity.leading,
+          orientation: OptionsOrientation.vertical,
         ));
       }
     }
