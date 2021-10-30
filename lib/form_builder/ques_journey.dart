@@ -171,6 +171,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
           'fields': [
             {
               'mark': 10,
+              'answer': 'faizal',
               'name': 'q4',
               'type': 'TextInput',
               'labelText': "",
@@ -191,6 +192,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             {
               'mark': 10,
               'name': 'q5',
+              'answer': '34',
               'type': 'TextInput',
               'labelText': "",
               // not work
@@ -209,6 +211,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
           'fields': [
             {
               'mark': 10,
+              'answer': 'zomato',
               'name': 'q6',
               'type': 'TextInput',
               'labelText': "",
@@ -228,6 +231,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
           'fields': [
             {
               'mark': 10,
+              'answer': '48',
               'name': 'q7',
               'type': 'TextInput',
               //  'labelText': "Job Title",
@@ -247,6 +251,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             {
               'mark': 10,
               'name': 'q8',
+              'answer': 'Undo',
               'type': 'Radio',
               'labelText': "",
               'options': ['Paste', 'New file', 'Delete', 'Undo'],
@@ -269,6 +274,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
               'name': 'q9',
               'type': 'TextInput',
               'labelText': "",
+              'answer': "knief",
               // not work
               "validation": {
                 "required": true,
@@ -288,6 +294,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
               'name': 'q10',
               'type': 'Radio',
               'labelText': "",
+              'answer': "are",
               'options': ['My name', 'Children', 'are', 'I have'],
               // not work
               "validation": {

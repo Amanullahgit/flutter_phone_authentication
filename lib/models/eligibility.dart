@@ -13,11 +13,12 @@ class ExamEvaluateModal with ChangeNotifier {
 
   Map get question_answer_mark => _question_answer_mark;
 
+  // INFO: consider field {answer} , match user's and with field answer and aloocate mark
   void assignMark(Map field, String ans) {
     if (field.containsKey('answer')) {
       String answer = field['answer'];
       print("answers $answer $ans");
-      if (answer == ans) {
+      if (answer.toLowerCase() == ans.toLowerCase()) {
         String name = field['name'];
         // Can be null and be provided from different source
         int mark = field['mark'];
@@ -30,6 +31,7 @@ class ExamEvaluateModal with ChangeNotifier {
     }
   }
 
+  // INFO: sum marks wrt to field name
   void markScored() {
     var values = _question_answer_mark.values;
     _mark_scored = values.reduce((sum, element) => sum + element);

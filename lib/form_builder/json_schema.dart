@@ -216,36 +216,24 @@ class _CoreFormState extends State<JsonSchema> {
             // 1. update model => assignMark
             // 2. call widget.onSubmitSave()
 
-            Map x = {
-              'mark': 10,
-              'answer': '68',
-              'name': 'q2',
-              'type': 'Radio',
-              'labelText': "",
-              'options': ['14', '9', '68', '36'],
-              // not work
-              "validation": {
-                "required": true,
-              }
-            };
-
-            var ans = '68';
-
             //TODO: Write better success and faliure on submit button clicked
             if (_formKey.currentState?.saveAndValidate() ?? false) {
-              // Assign mark to answers
-              context.read<ExamEvaluateModal>().assignMark(x, ans);
+              List fields = formGeneral['fields'];
 
-              // calculate total mark
-              context.read<ExamEvaluateModal>().markScored();
+              fields.forEach((field) {
+                String name = field['name'];
 
-              print(_formKey.currentState?.value);
-              print(context.read<ExamEvaluateModal>().question_answer_mark);
+                String ans = _formKey.currentState.fields[name].value;
 
-              // INFO: provider, use setter to change Modal value
-              // context.read<ExamEvaluateModal>().increment();
+                print("asdasd $name >> $field >> $ans");
 
-              // context.read<ExamEvaluateModal>().assignMark();
+                // Assign mark to answers
+                context.read<ExamEvaluateModal>().assignMark(field, ans);
+
+                // calculate total mark
+                context.read<ExamEvaluateModal>().markScored();
+                print(context.read<ExamEvaluateModal>().question_answer_mark);
+              });
 
               // On submit button pressed
               widget.onSubmitSave(context);
