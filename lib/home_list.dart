@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:phone_auth_project/login.dart';
 import './form_builder/ques_journey.dart';
 
-class Home extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
   String uid;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('HomeScreen'),
       ),
       body: Container(
           padding: EdgeInsets.fromLTRB(10, 10, 10, 0),

@@ -13,13 +13,18 @@ class _CongratesState extends State<Congrates> {
   String uid;
   @override
   Widget build(BuildContext context) {
+    // INFO: calculate mark score
+    // context.read<ExamEvaluateModal>().markScored();
+    // does not work here
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Result'),
       ),
       body: Column(
         children: [
-          Center(child: Text('${context.watch<ExamEvaluateModal>().count}')),
+          Center(
+              child: Text('${context.watch<ExamEvaluateModal>().mark_scored}')),
           Text(
               'Congrates, You have completed the test. Our executive will reach you')
         ],
