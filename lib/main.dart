@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 import './common/theme.dart';
 import './models/eligibility.dart';
 
-// import 'login.dart';
+import 'login.dart';
 // import './onboard/onboard_form.dart';
-import 'home_list.dart';
+// import 'home_list.dart';
 
 // OnboardingScreen
 // import 'congrates.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: appTheme,
-      home: HomeScreen(),
+      home: LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
