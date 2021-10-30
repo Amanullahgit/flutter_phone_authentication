@@ -79,7 +79,26 @@ class _CoreFormState extends State<JsonSchema> {
           style: new TextStyle(fontSize: 16.0, fontStyle: FontStyle.normal),
         ));
       } else if (formGeneral['question']['type'] == 'Image') {
-        listWidget.add(Image.network(formGeneral['question']['source']));
+        final imgURL = formGeneral['question']['source'];
+        listWidget.add(
+          // Show loader while image is being loaded
+          Image.network(
+            imgURL,
+            fit: BoxFit.fill,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes
+                      : null,
+                ),
+              );
+            },
+          ),
+        );
       }
     }
 
