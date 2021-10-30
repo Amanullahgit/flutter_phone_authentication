@@ -106,7 +106,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
 
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Home()),
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
                 );
 
                 this.response = response;

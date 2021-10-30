@@ -68,8 +68,10 @@ class _CoreFormState extends State<JsonSchema> {
   List<Widget> jsonToForm() {
     List<Widget> listWidget = new List<Widget>();
 
+    // INFO: create some space
     listWidget.add(const SizedBox(height: 15));
 
+    // INFO: Question section in screen: question related widget get pushed to listWidget
     if (formGeneral['question'] != null) {
       if (formGeneral['question']['type'] == 'Text') {
         listWidget.add(Text(
@@ -81,13 +83,18 @@ class _CoreFormState extends State<JsonSchema> {
       }
     }
 
+    // INFO: used flutter_form_fields to render fields on screen
     for (var count = 0; count < formGeneral['fields'].length; count++) {
       listWidget.add(const SizedBox(height: 15));
 
       Map item = formGeneral['fields'][count];
 
+      // var fieldController;
+
       if (item['type'] == "TextInput") {
+        // fieldController = TextFie
         listWidget.add(new FormBuilderTextField(
+          // controller: fieldController,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           name: item['name'],
           decoration: InputDecoration(
@@ -205,12 +212,40 @@ class _CoreFormState extends State<JsonSchema> {
         MaterialButton(
           color: Theme.of(context).colorScheme.secondary,
           onPressed: () {
+            // Responsibilities of Screen's form submit
+            // 1. update model => assignMark
+            // 2. call widget.onSubmitSave()
+
+            Map x = {
+              'mark': 10,
+              'answer': '68',
+              'name': 'q2',
+              'type': 'Radio',
+              'labelText': "",
+              'options': ['14', '9', '68', '36'],
+              // not work
+              "validation": {
+                "required": true,
+              }
+            };
+
+            var ans = '68';
+
             //TODO: Write better success and faliure on submit button clicked
             if (_formKey.currentState?.saveAndValidate() ?? false) {
+              // Assign mark to answers
+              context.read<ExamEvaluateModal>().assignMark(x, ans);
+
+              // calculate total mark
+              context.read<ExamEvaluateModal>().markScored();
+
               print(_formKey.currentState?.value);
+              print(context.read<ExamEvaluateModal>().question_answer_mark);
 
               // INFO: provider, use setter to change Modal value
-              context.read<ExamEvaluateModal>().increment();
+              // context.read<ExamEvaluateModal>().increment();
+
+              // context.read<ExamEvaluateModal>().assignMark();
 
               // On submit button pressed
               widget.onSubmitSave(context);

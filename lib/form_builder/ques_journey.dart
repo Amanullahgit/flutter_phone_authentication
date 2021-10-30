@@ -18,6 +18,8 @@ import 'package:flutter/material.dart';
 import './json_schema.dart';
 import '../congrates.dart';
 
+import './../models/eligibility.dart';
+
 // QuestionJourney extends Journey
 // In future there can be other journeys that can be extracted from Journey class
 class QuestionJourney extends StatefulWidget {
@@ -59,12 +61,15 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             child: new Center(
                 child: new Column(children: <Widget>[
           JsonSchema(
+              // INFO: response here is context
               onSubmitSave: (dynamic response) {
-                // print("passed onSubmitSave---- $response");
-                // print(widget.screenIndex);
-                // print(_getScreenCount());
+                print("response $response");
 
-                // This condition should be tight
+                // INFO: on question submit update marks attained by user
+                // response.read<ExamEvaluateModal>().assignMark();
+
+                // INFO: use screenIndex to pull out json object from screens json passed
+                // TODO: This condition should be tight
                 // When screenIndex == _getScreenCount() index error occur
                 if (widget.screenIndex == _getScreenCount() - 1) {
                   Navigator.push(context,
@@ -99,10 +104,11 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source': "Find the number of A in BBBAAAACCCAADDDDDAeeeeeA",
             'type': 'Text'
           },
-          'mark': 10,
           // calculate question's answer mark in Widget; update _score
           'fields': [
             {
+              'mark': 10,
+              'answer': '8',
               'name': 'q1',
               'type': 'Radio',
               'labelText': "",
@@ -120,9 +126,10 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source': "7 * 11 -9 is equal to",
             'type': 'Text',
           },
-          'mark': 10,
           'fields': [
             {
+              'mark': 10,
+              'answer': '68',
               'name': 'q2',
               'type': 'Radio',
               'labelText': "",
@@ -140,9 +147,10 @@ class _QuestionJourneyState extends State<QuestionJourney> {
                 "Pack of 1 box has 10 cigarette, Pack of _____ = 120 cigarette Fill in the blanks with right value",
             'type': 'Text',
           },
-          'mark': 10,
           'fields': [
             {
+              'mark': 10,
+              'answer': '12',
               'name': 'q3',
               'type': 'Radio',
               'labelText': "",
@@ -160,9 +168,9 @@ class _QuestionJourneyState extends State<QuestionJourney> {
                 'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441627/questions/q4_nehbqa.png',
             'type': 'Image',
           },
-          'mark': 10,
           'fields': [
             {
+              'mark': 10,
               'name': 'q4',
               'type': 'TextInput',
               'labelText': "",
@@ -179,9 +187,9 @@ class _QuestionJourneyState extends State<QuestionJourney> {
                 'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441627/questions/q5_ogi2xz.png',
             'type': 'Image',
           },
-          'mark': 10,
           'fields': [
             {
+              'mark': 10,
               'name': 'q5',
               'type': 'TextInput',
               'labelText': "",
@@ -198,9 +206,9 @@ class _QuestionJourneyState extends State<QuestionJourney> {
                 'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441627/questions/q6_amfqhw.png',
             'type': 'Image',
           },
-          'mark': 10,
           'fields': [
             {
+              'mark': 10,
               'name': 'q6',
               'type': 'TextInput',
               'labelText': "",
@@ -219,6 +227,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
           },
           'fields': [
             {
+              'mark': 10,
               'name': 'q7',
               'type': 'TextInput',
               //  'labelText': "Job Title",
@@ -234,9 +243,9 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source': 'Ctrl + Z is shortcut for',
             'type': 'Text',
           },
-          'mark': 10,
           'fields': [
             {
+              'mark': 10,
               'name': 'q8',
               'type': 'Radio',
               'labelText': "",
@@ -254,9 +263,9 @@ class _QuestionJourneyState extends State<QuestionJourney> {
                 'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441630/questions/q9_tddqsm.png',
             'type': 'Image',
           },
-          'mark': 10,
           'fields': [
             {
+              'mark': 10,
               'name': 'q9',
               'type': 'TextInput',
               'labelText': "",
@@ -273,9 +282,9 @@ class _QuestionJourneyState extends State<QuestionJourney> {
                 '"My name are Rohan and I have two children". What is wrong in this statement?',
             'type': 'Text',
           },
-          'mark': 10,
           'fields': [
             {
+              'mark': 10,
               'name': 'q10',
               'type': 'Radio',
               'labelText': "",
