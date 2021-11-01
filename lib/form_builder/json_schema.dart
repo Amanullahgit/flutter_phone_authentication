@@ -84,6 +84,7 @@ class _CoreFormState extends State<JsonSchema> {
           // Show loader while image is being loaded
           Image.network(
             imgURL,
+            height: 160,
             fit: BoxFit.fill,
             loadingBuilder: (BuildContext context, Widget child,
                 ImageChunkEvent loadingProgress) {
