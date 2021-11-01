@@ -102,7 +102,8 @@ class _QuestionJourneyState extends State<QuestionJourney> {
           // define other params in screen
           'question': {
             'source': "Find the number of A in BBBAAAACCCAADDDDDAeeeeeA",
-            'type': 'Text'
+            'type': 'Text',
+            'pid': '1',
           },
           // calculate question's answer mark in Widget; update _score
           'fields': [
@@ -125,6 +126,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
           'question': {
             'source': "7 * 11 -9 is equal to",
             'type': 'Text',
+            'pid': '2',
           },
           'fields': [
             {
@@ -146,6 +148,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source':
                 "Pack of 1 box has 10 cigarette, Pack of _____ = 120 cigarette Fill in the blanks with right value",
             'type': 'Text',
+            'pid': '3',
           },
           'fields': [
             {
@@ -167,6 +170,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source':
                 'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441627/questions/q4_nehbqa.png',
             'type': 'Image',
+            'pid': '4',
           },
           'fields': [
             {
@@ -187,6 +191,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source':
                 'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441627/questions/q5_ogi2xz.png',
             'type': 'Image',
+            'pid': '5',
           },
           'fields': [
             {
@@ -207,6 +212,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source':
                 'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441627/questions/q6_amfqhw.png',
             'type': 'Image',
+            'pid': '6',
           },
           'fields': [
             {
@@ -227,6 +233,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source':
                 'Ram has 10 books. Sham gave him 15 books. Ghanshyam also gave him 23 books. How many total books Ram has now?',
             'type': 'Text',
+            'pid': '7',
           },
           'fields': [
             {
@@ -246,6 +253,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
           'question': {
             'source': 'Ctrl + Z is shortcut for',
             'type': 'Text',
+            'pid': '8',
           },
           'fields': [
             {
@@ -267,6 +275,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source':
                 'https://res.cloudinary.com/dmtuysbcn/image/upload/v1635441630/questions/q9_tddqsm.png',
             'type': 'Image',
+            'pid': '9',
           },
           'fields': [
             {
@@ -287,6 +296,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
             'source':
                 '"My name are Rohan and I have two children". What is wrong in this statement?',
             'type': 'Text',
+            'pid': '10',
           },
           'fields': [
             {

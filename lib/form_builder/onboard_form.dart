@@ -28,7 +28,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
         'name': 'location',
         'type': 'Dropdown',
         'labelText': "Select Location",
-        'options': ['Bengalure', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
+        'options': ['Bengaluru', 'Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
         "validation": {
           "required": true,
         },
@@ -53,7 +53,14 @@ class _OnboardingScreen extends State<OnboardingScreen> {
         'name': 'workExp',
         'type': 'Dropdown',
         'labelText': "Total Work Experience",
-        'options': ['1 year', '2 year', '3 year', '4 year', '5+ year'],
+        'options': [
+          'Fresher',
+          '1 year',
+          '2 year',
+          '3 year',
+          '4 year',
+          '5+ year'
+        ],
         "validation": {
           "required": true,
         },
@@ -94,7 +101,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Onboard"),
+        title: new Text("Onboarding"),
       ),
       body: new SingleChildScrollView(
         child: new Center(
