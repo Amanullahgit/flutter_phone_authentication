@@ -247,8 +247,6 @@ class _CoreFormState extends State<JsonSchema> {
                 // Assign mark to answers
                 context.read<ExamEvaluateModal>().assignMark(field, ans);
 
-                // calculate total mark
-                context.read<ExamEvaluateModal>().markScored();
                 print(context.read<ExamEvaluateModal>().question_answer_mark);
 
                 // INFO: Works but not a good place to declare

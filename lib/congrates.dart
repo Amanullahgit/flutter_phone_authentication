@@ -27,8 +27,14 @@ class Congrates extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: Not a good place to add, place it somewhere
+    // calculate total mark
+    // context.read<ExamEvaluateModal>().markScored();
+    Provider.of<ExamEvaluateModal>(context, listen: false).markScored();
+
     int _markScored =
         Provider.of<ExamEvaluateModal>(context, listen: false).mark_scored;
+
     return Scaffold(
         appBar: AppBar(title: Text('Result')),
         body: Center(
