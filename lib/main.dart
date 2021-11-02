@@ -1,11 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:phone_auth_project/home_list.dart';
+import 'package:phone_auth_project/login.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 import './common/theme.dart';
 import './models/eligibility.dart';
+// import './models/shared_preferences.dart';
+// import './models/user.dart';
 
 // import 'login.dart';
 // import './onboard/onboard_form.dart';
@@ -27,18 +30,19 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Dashhire',
       theme: appTheme,
-      // home: HomeScreen(),
       home: AnimatedSplashScreen(
           duration: 3000,
           splash: Icons.home,
-          nextScreen: HomeScreen(),
+          nextScreen: LoginScreen(),
           splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.deepPurpleAccent),
+      // home: Congrates(),
       debugShowCheckedModeBanner: false,
     );
   }
