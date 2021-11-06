@@ -153,6 +153,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
             ),
           ),
           _captureControlRowWidget(),
+          // INFO: does not work 'isCaptureOrientationLcoked called om null'
           // _modeControlRowWidget(),
           Padding(
             padding: const EdgeInsets.all(5.0),
