@@ -579,7 +579,6 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     };
 
     if (cameras.isEmpty) {
-      // _getCameras().then((value) => {print("camera >>>>>>>>>>>>>>> $cameras")});
       return const Text('No camera found');
     } else {
       for (CameraDescription cameraDescription in cameras) {
@@ -994,19 +993,33 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
 class CameraApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: CameraExampleHome(),
-    );
+    return FutureBuilder<List<CameraDescription>>(
+        future: _getCameras(), // function where you call your api
+        builder: (BuildContext context,
+            AsyncSnapshot<List<CameraDescription>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: Text('Please wait its loading...'));
+          } else {
+            if (snapshot.hasError)
+              return Center(child: Text('Error: ${snapshot.error}'));
+            else
+              return MaterialApp(
+                home: CameraExampleHome(),
+              ); // snapshot.data  :- get your object which is pass from your downloadData() function
+          }
+        });
   }
 }
 
 List<CameraDescription> cameras = [];
 
-Future<void> _getCameras() async {
+Future<List<CameraDescription>> _getCameras() async {
   // Fetch the available cameras before initializing the app.
   try {
     WidgetsFlutterBinding.ensureInitialized();
     cameras = await availableCameras();
+    print("<<<<<<<<<<>>>>>>>>>> $cameras");
+    return cameras;
   } on CameraException catch (e) {
     logError(e.code, e.description);
   }
