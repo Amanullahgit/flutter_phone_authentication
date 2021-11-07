@@ -64,12 +64,15 @@ class _QuestionJourneyState extends State<QuestionJourney> {
         body: new Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("$company_name"),
-                  Text("${widget.screenIndex + 1} / ${_getScreenCount()}")
-                ],
+              Container(
+                color: Theme.of(context).secondaryHeaderColor,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("$company_name"),
+                    Text("${widget.screenIndex + 1} / ${_getScreenCount()}")
+                  ],
+                ),
               ),
               JsonSchema(
                   // INFO: response here is context
