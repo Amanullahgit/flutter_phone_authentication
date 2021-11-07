@@ -4,7 +4,7 @@ final appTheme = ThemeData(
   // Define the default brightness and colors.
   brightness: Brightness.light,
   primaryColor: Colors.deepPurple,
-  secondaryHeaderColor: Colors.purpleAccent[400],
+  secondaryHeaderColor: Colors.purpleAccent[300],
 
   // Define the default font family.
   fontFamily: 'Corben',
