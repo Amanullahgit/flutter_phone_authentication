@@ -40,7 +40,11 @@ class MyApp extends StatelessWidget {
       theme: appTheme,
       home: AnimatedSplashScreen(
           duration: 1000,
-          splash: Icons.home,
+          splash: Text(
+            "Dashhire",
+            style: TextStyle(
+                color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
+          ),
           nextScreen: LoginScreen(),
           splashTransition: SplashTransition.fadeTransition,
           backgroundColor: Colors.deepPurpleAccent),
