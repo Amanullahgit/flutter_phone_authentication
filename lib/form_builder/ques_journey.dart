@@ -57,33 +57,42 @@ class _QuestionJourneyState extends State<QuestionJourney> {
     return new Scaffold(
         appBar: new AppBar(
             title: new Text("Test"), automaticallyImplyLeading: true),
-        body: new SingleChildScrollView(
-            child: new Center(
-                child: new Column(children: <Widget>[
-          JsonSchema(
-              // INFO: response here is context
-              onSubmitSave: (dynamic response) {
-                print("response $response");
+        body: new Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Company Name"),
+                  Text("${widget.screenIndex + 1} / ${_getScreenCount()}")
+                ],
+              ),
+              JsonSchema(
+                  // INFO: response here is context
+                  onSubmitSave: (dynamic response) {
+                    print("response $response");
 
-                // INFO: on question submit update marks attained by user
-                // response.read<ExamEvaluateModal>().assignMark();
+                    // INFO: on question submit update marks attained by user
+                    // response.read<ExamEvaluateModal>().assignMark();
 
-                // INFO: use screenIndex to pull out json object from screens json passed
-                // TODO: This condition should be tight
-                // When screenIndex == _getScreenCount() index error occur
-                if (widget.screenIndex == _getScreenCount() - 1) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => new Congrates()));
-                } else {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => new QuestionJourney(
-                              screenIndex: widget.screenIndex + 1)));
-                }
-              },
-              form: _getFormScreen()),
-        ]))));
+                    // INFO: use screenIndex to pull out json object from screens json passed
+                    // TODO: This condition should be tight
+                    // When screenIndex == _getScreenCount() index error occur
+                    if (widget.screenIndex == _getScreenCount() - 1) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => new Congrates()));
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => new QuestionJourney(
+                                  screenIndex: widget.screenIndex + 1)));
+                    }
+                  },
+                  form: _getFormScreen()),
+            ]));
   }
 
   @override

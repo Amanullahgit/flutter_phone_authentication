@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'package:meta/meta.dart';
 import './../models/eligibility.dart';
+import './../widgets/button_widget.dart';
 
 // INFO: JsonSchema can build "a screen" form using json
 // Valid input json, that JsonSchema operated on
@@ -84,7 +85,7 @@ class _CoreFormState extends State<JsonSchema> {
           // Show loader while image is being loaded
           Image.network(
             imgURL,
-            height: 160,
+            height: 140,
             fit: BoxFit.fill,
             loadingBuilder: (BuildContext context, Widget child,
                 ImageChunkEvent loadingProgress) {
@@ -120,6 +121,7 @@ class _CoreFormState extends State<JsonSchema> {
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: item['labelText'],
+
             // helperText: 'Helper text',
             // hintText: 'Hint text',
           ),
@@ -212,61 +214,65 @@ class _CoreFormState extends State<JsonSchema> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(children: <Widget>[
-        // Text(question),
-        FormBuilder(
-            key: _formKey,
-            // enabled: false,
-            autovalidateMode:
-                formGeneral['autoValidated'] ?? AutovalidateMode.disabled,
-            skipDisabled: true,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: jsonToForm(),
-            )),
-        MaterialButton(
-          color: Theme.of(context).colorScheme.secondary,
-          onPressed: () {
-            // Responsibilities of Screen's form submit
-            // 1. update model => assignMark
-            // 2. call widget.onSubmitSave()
+    return Expanded(
+      flex: 1,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              // Text(question),
+              FormBuilder(
+                  key: _formKey,
+                  // enabled: false,
+                  autovalidateMode:
+                      formGeneral['autoValidated'] ?? AutovalidateMode.disabled,
+                  skipDisabled: true,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: jsonToForm(),
+                  )),
+              RoundedButtonWidget(
+                buttonText: 'Continue',
+                onPressed: () {
+                  // Responsibilities of Screen's form submit
+                  // 1. update model => assignMark
+                  // 2. call widget.onSubmitSave()
 
-            //TODO: Write better success and faliure on submit button clicked
-            if (_formKey.currentState?.saveAndValidate() ?? false) {
-              List fields = formGeneral['fields'];
+                  //TODO: Write better success and faliure on submit button clicked
+                  if (_formKey.currentState?.saveAndValidate() ?? false) {
+                    List fields = formGeneral['fields'];
 
-              fields.forEach((field) {
-                String name = field['name'];
+                    fields.forEach((field) {
+                      String name = field['name'];
 
-                String ans = _formKey.currentState.fields[name].value;
+                      String ans = _formKey.currentState.fields[name].value;
 
-                print("asdasd $name >> $field >> $ans");
+                      print("asdasd $name >> $field >> $ans");
 
-                // Assign mark to answers
-                context.read<ExamEvaluateModal>().assignMark(field, ans);
+                      // Assign mark to answers
+                      context.read<ExamEvaluateModal>().assignMark(field, ans);
 
-                print(context.read<ExamEvaluateModal>().question_answer_mark);
+                      print(context
+                          .read<ExamEvaluateModal>()
+                          .question_answer_mark);
 
-                // INFO: Works but not a good place to declare
-                // final model = Provider.of<ExamEvaluateModal>(context);
-                // print("mode l $model");
-              });
+                      // INFO: Works but not a good place to declare
+                      // final model = Provider.of<ExamEvaluateModal>(context);
+                      // print("mode l $model");
+                    });
 
-              // On submit button pressed
-              widget.onSubmitSave(context);
-            } else {
-              print(_formKey.currentState?.value);
-              print('validation failed');
-            }
-          },
-          child: const Text(
-            'Submit',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      ]),
+                    // On submit button pressed
+                    widget.onSubmitSave(context);
+                  } else {
+                    print(_formKey.currentState?.value);
+                    print('validation failed');
+                  }
+                },
+              ),
+            ]),
+      ),
     );
   }
 }
