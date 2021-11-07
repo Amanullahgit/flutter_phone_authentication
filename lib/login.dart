@@ -39,14 +39,19 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             margin: EdgeInsets.all(10),
             width: double.infinity,
-            child: RoundedButtonWidget(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => OTPScreen(_controller.text)));
-              },
-              buttonText: 'Continue',
+            child: Column(
+              children: [
+                RoundedButtonWidget(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => OTPScreen(_controller.text)));
+                  },
+                  buttonText: 'Continue',
+                ),
+                Text('By continuing you agree to our Terms and Condition')
+              ],
             ),
-          )
+          ),
         ],
       ),
     );

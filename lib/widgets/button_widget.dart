@@ -12,11 +12,14 @@ class RoundedButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return MaterialButton(
+      height: 35.0,
+      minWidth: 370.0,
+      color: Theme.of(context).primaryColor,
+      textColor: Colors.white,
+      child: new Text(buttonText),
       onPressed: onPressed,
-      child: Text(
-        buttonText,
-      ),
+      splashColor: Colors.deepPurple[300],
     );
   }
 }
