@@ -4,8 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:phone_auth_project/login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import './form_builder/ques_journey.dart';
+import './../models/eligibility.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -102,8 +104,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: TextStyle(fontSize: 10),
                           ),
                           MaterialButton(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Theme.of(context).primaryColor,
                             onPressed: () {
+                              // maintain state: job_selected
+                              Provider.of<ExamEvaluateModal>(context,
+                                      listen: false)
+                                  .job_select(_getJob(index));
+
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

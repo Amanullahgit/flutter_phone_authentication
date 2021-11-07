@@ -14,6 +14,7 @@
 // });
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './json_schema.dart';
 import '../congrates.dart';
@@ -54,6 +55,9 @@ class _QuestionJourneyState extends State<QuestionJourney> {
 
   @override
   Widget build(BuildContext context) {
+    String company_name = Provider.of<ExamEvaluateModal>(context, listen: false)
+        .job_selected['company_name'];
+
     return new Scaffold(
         appBar: new AppBar(
             title: new Text("Test"), automaticallyImplyLeading: true),
@@ -63,7 +67,7 @@ class _QuestionJourneyState extends State<QuestionJourney> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Company Name"),
+                  Text("$company_name"),
                   Text("${widget.screenIndex + 1} / ${_getScreenCount()}")
                 ],
               ),
