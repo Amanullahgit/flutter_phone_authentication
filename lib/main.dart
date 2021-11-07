@@ -7,6 +7,8 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 import './common/theme.dart';
 import './models/eligibility.dart';
+
+// import './components/video_full.dart';
 // import './models/shared_preferences.dart';
 // import './models/user.dart';
 
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
       title: 'Dashhire',
       theme: appTheme,
       home: AnimatedSplashScreen(
-          duration: 3000,
+          duration: 1000,
           splash: Icons.home,
           nextScreen: LoginScreen(),
           splashTransition: SplashTransition.fadeTransition,

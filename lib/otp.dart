@@ -26,17 +26,15 @@ class _OTPScreenState extends State<OTPScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldkey,
-      appBar: AppBar(
-        title: Text('OTP Verification'),
-      ),
+      appBar: AppBar(),
       body: Column(
         children: [
           Container(
             margin: EdgeInsets.only(top: 40),
             child: Center(
               child: Text(
-                'Verify +91-${widget.phone}',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
+                'OTP sent to +91-${widget.phone}',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
           ),
@@ -78,7 +76,12 @@ class _OTPScreenState extends State<OTPScreen> {
                 }
               },
             ),
-          )
+          ),
+          TextButton(
+              onPressed: () {
+                _verifyPhone();
+              },
+              child: Text('Resend otp'))
         ],
       ),
     );

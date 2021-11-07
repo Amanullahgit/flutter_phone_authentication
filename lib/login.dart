@@ -195,9 +195,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         RoundedButtonWidget(
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    OTPScreen(_controller.text)));
+                            if (_controller.text.length == 10) {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      OTPScreen(_controller.text)));
+                            }
                           },
                           buttonText: 'Continue',
                         ),
