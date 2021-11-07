@@ -172,6 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Column(children: [
                     Container(
+                      color: Colors.white,
                       margin: EdgeInsets.only(top: 40, right: 10, left: 10),
                       child: TextField(
                         decoration: InputDecoration(
