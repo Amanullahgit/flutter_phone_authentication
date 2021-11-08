@@ -64,8 +64,10 @@ class _HomeScreenState extends State<HomeScreen> {
             if (snapshot.hasError)
               return Center(child: Text('Error: ${snapshot.error}'));
             else
-              return Container(
-                child: ListView.builder(
+              return new Scaffold(
+                appBar: new AppBar(
+                    title: new Text("Jobs"), automaticallyImplyLeading: true),
+                body: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: _getTotalJobs(), // the length
