@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:phone_auth_project/otp.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import './widgets/button_widget.dart';
+import './../models/eligibility.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -197,6 +199,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         RoundedButtonWidget(
                           onPressed: () {
                             if (_controller.text.length == 10) {
+                              // INFO: save user mobile
+                              Provider.of<ExamEvaluateModal>(context,
+                                      listen: false)
+                                  .set_mobile(_controller.text);
+
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) =>
                                       OTPScreen(_controller.text)));

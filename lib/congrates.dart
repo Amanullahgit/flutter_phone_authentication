@@ -28,10 +28,8 @@ class Congrates extends StatelessWidget {
   }
 
   dynamic submitApplication(context) async {
-    // String mobile =
-    //     Provider.of<ExamEvaluateModal>(context, listen: false).mobile;
-
-    String mobile = "+918011230914";
+    String mobile =
+        Provider.of<ExamEvaluateModal>(context, listen: false).mobile;
 
     Map job =
         Provider.of<ExamEvaluateModal>(context, listen: false).job_selected;

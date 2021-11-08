@@ -3,8 +3,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:supabase/supabase.dart';
-
+import 'package:provider/provider.dart';
+import '../utils/supabase_service.dart';
+import '../models/eligibility.dart';
 import 'json_schema.dart';
 import '../home_list.dart';
 
@@ -99,14 +100,15 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   });
   dynamic response;
 
-  void supabaseService(dynamic _formKey) async {
-    final client = SupabaseClient('https://nquwrxpqaiohypvambqs.supabase.co',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDI5NDc0OSwiZXhwIjoxOTQ5ODcwNzQ5fQ.78qQYcAGImoc5oAxZC9WMs5DGDYMVjsCWb8qYMhNFUA');
+  void setOnboardingData(context, dynamic _formKey) async {
+    String mobile =
+        Provider.of<ExamEvaluateModal>(context, listen: false).mobile;
 
-    // insert data
-    final insertResponse = await client.from('onboarding').insert([
+    print("$mobile >>>>");
+    SupabaseService supabase = new SupabaseService();
+    final selectResponse = await supabase.insert("onboarding", [
       {
-        "mobile": "+918011230990",
+        "mobile": mobile,
         "fullname": _formKey.currentState.fields['name'].value,
         "location": _formKey.currentState.fields['location'].value,
         "education": _formKey.currentState.fields['education'].value,
@@ -117,14 +119,24 @@ class _OnboardingScreen extends State<OnboardingScreen> {
         "monthly_income":
             _formKey.currentState.fields['currentMonthlyIncome'].value,
       }
-    ]).execute();
-    if (insertResponse.error == null) {
-      print('>>>>>>>>>>>>>>>>>>insertResponse.data: ${insertResponse.data}');
+    ]);
+
+    if (selectResponse.error == null) {
+      print('response.data: ${selectResponse.data}');
+      FocusScope.of(context).unfocus();
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Congrates onboarding successfull")));
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+          (route) => false);
+      // print("<><><><><><><><><><><>< $data");
     } else {
-      print('>>>>>>>>>>>>>>>>>>>insertResponse.error: ${insertResponse.error}');
+      // print('>>>>>>>>>>>>>>>>>>>selectResponse.error: ${selectResponse.error}');
       FocusScope.of(context).unfocus();
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(insertResponse.error.message)));
+          .showSnackBar(SnackBar(content: Text(selectResponse.error.message)));
     }
   }
 
@@ -142,7 +154,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
               onSubmitSave: (dynamic response, dynamic _formKey) {
                 print("passed onSubmitSave---- $response  $_formKey");
                 // Make API call to server
-                supabaseService(_formKey);
+                setOnboardingData(context, _formKey);
 
                 this.response = response;
               },

@@ -9,7 +9,7 @@ class ExamEvaluateModal with ChangeNotifier {
 
   // JSON is been converted to string and been moved around in state
   String _ques_journey = "";
-  String _mobile = "+918011230914";
+  String _mobile = "";
 
   int _mark_scored = 0;
 
@@ -36,7 +36,7 @@ class ExamEvaluateModal with ChangeNotifier {
   }
 
   void set_mobile(String mobile) {
-    _mobile = "+918011230914";
+    _mobile = mobile;
   }
 
   // INFO: consider field {answer} , match user's 'ans' with field answer and allocate mark
