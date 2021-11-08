@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:phone_auth_project/home_list.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'form_builder/onboard_form.dart';
+import './utils/supabase_service.dart';
 
 class OTPScreen extends StatefulWidget {
   final String phone;
@@ -58,11 +60,30 @@ class _OTPScreenState extends State<OTPScreen> {
                           verificationId: _verificationCode, smsCode: pin))
                       .then((value) async {
                     if (value.user != null) {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OnboardingScreen()),
-                          (route) => false);
+                      String phone = widget.phone;
+
+                      SupabaseService supabase = new SupabaseService();
+                      // TODO: This filter does nor works
+                      final selectResponse =
+                          await supabase.filter("onboarding", "mobile", phone);
+
+                      if (selectResponse.error == null) {
+                        print('response.data: ${selectResponse.data}');
+                        final List data = selectResponse.data;
+                        if (data.length == 0) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OnboardingScreen()),
+                              (route) => false);
+                        } else {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()),
+                              (route) => false);
+                        }
+                      }
                     }
                   });
                 } catch (e) {
