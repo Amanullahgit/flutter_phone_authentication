@@ -42,9 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
       print('response.data: ${selectResponse.data}');
       data = json.encode({"jobs": selectResponse.data});
 
-      print("<><><><><><><><><><><>< $data");
+      // print("<><><><><><><><><><><>< $data");
     } else {
-      print('>>>>>>>>>>>>>>>>>>>selectResponse.error: ${selectResponse.error}');
+      // print('>>>>>>>>>>>>>>>>>>>selectResponse.error: ${selectResponse.error}');
       FocusScope.of(context).unfocus();
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(selectResponse.error.message)));
