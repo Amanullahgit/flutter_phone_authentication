@@ -3,6 +3,8 @@ import 'package:phone_auth_project/home_list.dart';
 import 'package:provider/provider.dart';
 import './models/eligibility.dart';
 import './home_list.dart';
+import './utils/supabase_service.dart';
+import './widgets/button_widget.dart';
 
 class Congrates extends StatelessWidget {
 //Remark Logic
@@ -23,6 +25,49 @@ class Congrates extends StatelessWidget {
       print(resultScore);
     }
     return resultText;
+  }
+
+  dynamic submitApplication(context) async {
+    // String mobile =
+    //     Provider.of<ExamEvaluateModal>(context, listen: false).mobile;
+
+    String mobile = "+918011230914";
+
+    Map job =
+        Provider.of<ExamEvaluateModal>(context, listen: false).job_selected;
+
+    int jobId = job["id"];
+
+    int markScored =
+        Provider.of<ExamEvaluateModal>(context, listen: false).mark_scored;
+
+    Map questionAnswer =
+        Provider.of<ExamEvaluateModal>(context, listen: false).question_answer;
+
+    print("$mobile >>>> $jobId >>> $markScored >>> $questionAnswer");
+    SupabaseService supabase = new SupabaseService();
+    final selectResponse = await supabase.insert("application", [
+      {
+        "mobile": mobile,
+        "job_id": jobId,
+        "test_score": markScored,
+        "answers": questionAnswer
+      }
+    ]);
+
+    if (selectResponse.error == null) {
+      print('response.data: ${selectResponse.data}');
+      FocusScope.of(context).unfocus();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Congrates your application is submitted with us")));
+
+      // print("<><><><><><><><><><><>< $data");
+    } else {
+      // print('>>>>>>>>>>>>>>>>>>>selectResponse.error: ${selectResponse.error}');
+      FocusScope.of(context).unfocus();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(selectResponse.error.message)));
+    }
   }
 
   @override
@@ -56,6 +101,13 @@ class Congrates extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
+
+              RoundedButtonWidget(
+                  buttonText: 'Submit your Score with us',
+                  onPressed: () {
+                    submitApplication(context);
+                  }),
+
               //Text
               MaterialButton(
                 child: Text(

@@ -49,4 +49,14 @@ class SupabaseService {
 
     return selectResponse;
   }
+
+  Future<PostgrestResponse> insert(String table, List<Map> data) async {
+    // query data
+    final selectResponse =
+        await client.from(table).insert(data).execute(count: CountOption.exact);
+
+    print("select Response ${selectResponse.data}");
+
+    return selectResponse;
+  }
 }
