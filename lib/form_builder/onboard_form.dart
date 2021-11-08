@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:supabase/supabase.dart';
 
 import 'json_schema.dart';
 import '../home_list.dart';
@@ -99,50 +99,32 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   });
   dynamic response;
 
-  void postHttp(dynamic _formKey) async {
-    var headers = {
-      'apikey':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDI5NDc0OSwiZXhwIjoxOTQ5ODcwNzQ5fQ.78qQYcAGImoc5oAxZC9WMs5DGDYMVjsCWb8qYMhNFUA',
-      'Authorization':
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDI5NDc0OSwiZXhwIjoxOTQ5ODcwNzQ5fQ.78qQYcAGImoc5oAxZC9WMs5DGDYMVjsCWb8qYMhNFUA',
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation'
-    };
-    var request = http.Request(
-        'POST',
-        Uri.parse(
-            'https://nquwrxpqaiohypvambqs.supabase.co/rest/v1/onboarding'));
-    request.body = json.encode({
-      "mobile": "+918011230990",
-      "fullname": _formKey.currentState['name'],
-      "location": _formKey.currentState['location'],
-      "education": _formKey.currentState['education'],
-      "work_exp": _formKey.currentState['workExp'],
-      "job_title": _formKey.currentState['jobTitle'],
-      "company_name": _formKey.currentState['currentCompanyName'],
-      "monthly_income": _formKey.currentState['currentMonthlyIncome'],
-    });
-    request.headers.addAll(headers);
+  void supabaseService(dynamic _formKey) async {
+    final client = SupabaseClient('https://nquwrxpqaiohypvambqs.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDI5NDc0OSwiZXhwIjoxOTQ5ODcwNzQ5fQ.78qQYcAGImoc5oAxZC9WMs5DGDYMVjsCWb8qYMhNFUA');
 
-    http.StreamedResponse response = await request.send();
-
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      print("--------||||||||||||||onboarding||||||||||||||||||||| 200");
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
-      // print(await response.stream.bytesToString());
+    // insert data
+    final insertResponse = await client.from('onboarding').insert([
+      {
+        "mobile": "+918011230990",
+        "fullname": _formKey.currentState.fields['name'].value,
+        "location": _formKey.currentState.fields['location'].value,
+        "education": _formKey.currentState.fields['education'].value,
+        "work_exp": _formKey.currentState.fields['workExp'].value,
+        "job_title": _formKey.currentState.fields['jobTitle'].value,
+        "company_name":
+            _formKey.currentState.fields['currentCompanyName'].value,
+        "monthly_income":
+            _formKey.currentState.fields['currentMonthlyIncome'].value,
+      }
+    ]).execute();
+    if (insertResponse.error == null) {
+      print('>>>>>>>>>>>>>>>>>>insertResponse.data: ${insertResponse.data}');
     } else {
-      print("--------|||||||||||||||||onboarding|||||||||||||||||| >200");
-
+      print('>>>>>>>>>>>>>>>>>>>insertResponse.error: ${insertResponse.error}');
       FocusScope.of(context).unfocus();
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text(response.reasonPhrase)));
-
-      // Show toggle route
-      // Avoid change route
-      // print(response.reasonPhrase);
+          .showSnackBar(SnackBar(content: Text(insertResponse.error.message)));
     }
   }
 
@@ -160,7 +142,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
               onSubmitSave: (dynamic response, dynamic _formKey) {
                 print("passed onSubmitSave---- $response  $_formKey");
                 // Make API call to server
-                postHttp(_formKey);
+                supabaseService(_formKey);
 
                 this.response = response;
               },
@@ -170,4 +152,10 @@ class _OnboardingScreen extends State<OnboardingScreen> {
       ),
     );
   }
+}
+
+@override
+Widget build(BuildContext context) {
+  // TODO: implement build
+  throw UnimplementedError();
 }
