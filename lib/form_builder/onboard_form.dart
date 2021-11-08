@@ -3,6 +3,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 import 'json_schema.dart';
 import '../home_list.dart';
 
@@ -97,6 +99,44 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   });
   dynamic response;
 
+  void postHttp() async {
+    var headers = {
+      'apikey':
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDI5NDc0OSwiZXhwIjoxOTQ5ODcwNzQ5fQ.78qQYcAGImoc5oAxZC9WMs5DGDYMVjsCWb8qYMhNFUA',
+      'Authorization':
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDI5NDc0OSwiZXhwIjoxOTQ5ODcwNzQ5fQ.78qQYcAGImoc5oAxZC9WMs5DGDYMVjsCWb8qYMhNFUA',
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation'
+    };
+    var request = http.Request(
+        'POST',
+        Uri.parse(
+            'https://nquwrxpqaiohypvambqs.supabase.co/rest/v1/onboarding'));
+    request.body = json.encode({
+      "company_name": "testCompany3",
+      "education_id": 1,
+      "exp_id": 2,
+      "job_title": "Delivery Guy",
+      "location_id": 3,
+      "mobile": "+918011230990",
+      "monthly_income": 120000
+    });
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print("--------||||||||||||||||||||||||||||||||||| 200");
+      // change Route
+      // print(await response.stream.bytesToString());
+    } else {
+      print("--------||||||||||||||||||||||||||||||||||| >200");
+      // Show toggle route
+      // Avoid change route
+      // print(response.reasonPhrase);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -110,6 +150,8 @@ class _OnboardingScreen extends State<OnboardingScreen> {
               form: form,
               onSubmitSave: (dynamic response) {
                 print("passed onSubmitSave---- $response");
+                // Make API call to server
+                postHttp();
 
                 Navigator.push(
                   context,

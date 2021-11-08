@@ -39,6 +39,7 @@ dependencies:
   camera: ^0.9.4+3
   video_player: ^2.2.6
   flutter_svg: ^0.23.0+1
+  http: ^0.13.4
 
 
 dev_dependencies:
