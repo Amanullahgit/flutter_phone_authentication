@@ -6,6 +6,7 @@ class ExamEvaluateModal with ChangeNotifier {
   var _question_answer_mark = new Map<String, int>();
   var _quesion_answer = new Map<String, String>();
   var _job_selected = new Map<String, dynamic>();
+  String _mobile = "";
 
   int _mark_scored = 0;
 
@@ -19,8 +20,14 @@ class ExamEvaluateModal with ChangeNotifier {
 
   Map get job_selected => _job_selected;
 
+  String get mobile => _mobile;
+
   void job_select(Map job) {
     _job_selected = job;
+  }
+
+  void set_mobile(String mobile) {
+    _mobile = mobile;
   }
 
   // INFO: consider field {answer} , match user's 'ans' with field answer and allocate mark

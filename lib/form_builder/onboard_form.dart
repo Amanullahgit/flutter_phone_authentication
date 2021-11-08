@@ -99,7 +99,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
   });
   dynamic response;
 
-  void postHttp() async {
+  void postHttp(dynamic _formKey) async {
     var headers = {
       'apikey':
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDI5NDc0OSwiZXhwIjoxOTQ5ODcwNzQ5fQ.78qQYcAGImoc5oAxZC9WMs5DGDYMVjsCWb8qYMhNFUA',
@@ -113,24 +113,33 @@ class _OnboardingScreen extends State<OnboardingScreen> {
         Uri.parse(
             'https://nquwrxpqaiohypvambqs.supabase.co/rest/v1/onboarding'));
     request.body = json.encode({
-      "company_name": "testCompany3",
-      "education_id": 1,
-      "exp_id": 2,
-      "job_title": "Delivery Guy",
-      "location_id": 3,
       "mobile": "+918011230990",
-      "monthly_income": 120000
+      "fullname": _formKey.currentState['name'],
+      "location": _formKey.currentState['location'],
+      "education": _formKey.currentState['education'],
+      "work_exp": _formKey.currentState['workExp'],
+      "job_title": _formKey.currentState['jobTitle'],
+      "company_name": _formKey.currentState['currentCompanyName'],
+      "monthly_income": _formKey.currentState['currentMonthlyIncome'],
     });
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print("--------||||||||||||||||||||||||||||||||||| 200");
-      // change Route
+      print("--------||||||||||||||onboarding||||||||||||||||||||| 200");
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
       // print(await response.stream.bytesToString());
     } else {
-      print("--------||||||||||||||||||||||||||||||||||| >200");
+      print("--------|||||||||||||||||onboarding|||||||||||||||||| >200");
+
+      FocusScope.of(context).unfocus();
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(response.reasonPhrase)));
+
       // Show toggle route
       // Avoid change route
       // print(response.reasonPhrase);
@@ -148,15 +157,10 @@ class _OnboardingScreen extends State<OnboardingScreen> {
           child: new Column(children: <Widget>[
             new JsonSchema(
               form: form,
-              onSubmitSave: (dynamic response) {
-                print("passed onSubmitSave---- $response");
+              onSubmitSave: (dynamic response, dynamic _formKey) {
+                print("passed onSubmitSave---- $response  $_formKey");
                 // Make API call to server
-                postHttp();
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
+                postHttp(_formKey);
 
                 this.response = response;
               },

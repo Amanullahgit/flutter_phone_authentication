@@ -70,7 +70,7 @@ class _CoreFormState extends State<JsonSchema> {
     List<Widget> listWidget = new List<Widget>();
 
     // INFO: create some space
-    listWidget.add(const SizedBox(height: 15));
+    listWidget.add(const SizedBox(height: 10));
 
     // INFO: Question section in screen: question related widget get pushed to listWidget
     if (formGeneral['question'] != null) {
@@ -265,7 +265,7 @@ class _CoreFormState extends State<JsonSchema> {
                     });
 
                     // On submit button pressed
-                    widget.onSubmitSave(context);
+                    widget.onSubmitSave(context, _formKey);
                   } else {
                     print(_formKey.currentState?.value);
                     print('validation failed');
