@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     SupabaseService supabase = new SupabaseService();
     final selectResponse = await supabase.query("jobs", "*");
 
-    data = json.encode({"jobs": []});
+    data = json.encode({});
 
     if (selectResponse.error == null) {
       print('response.data: ${selectResponse.data}');
@@ -173,59 +173,5 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    getJobListing();
-    // data = json.encode({
-    //   'jobs': [
-    //     {
-    //       'title': 'Telesales Executives',
-    //       'company_name': 'Uber Technologies',
-    //       'salary': '₹ 1,20,000 - 3,00,000 P.A',
-    //       'location': 'Bengaluru',
-    //       'icon_uri':
-    //           'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/telesales-fa.svg',
-    //     },
-    //     {
-    //       'title': 'Delivery Boy',
-    //       'company_name': 'Swiggy',
-    //       'salary': '₹ 1,20,000 - 3,00,000 P.A',
-    //       'location': 'Bengaluru',
-    //       'icon_uri':
-    //           'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/delivery-fa.svg',
-    //     },
-    //     {
-    //       'title': 'Customer Care',
-    //       'company_name': 'Swiggy',
-    //       'salary': '₹ 1,20,000 - 3,00,000 P.A',
-    //       'location': 'Bengaluru',
-    //       'icon_uri':
-    //           'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/customer-care-fa.svg',
-    //     },
-    //     {
-    //       'title': 'Delivery Boy',
-    //       'company_name': 'Swiggy',
-    //       'salary': '₹ 1,20,000 - 3,00,000 P.A',
-    //       'location': 'Bengaluru',
-    //       'icon_uri':
-    //           'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/delivery-fa.svg',
-    //     },
-    //     {
-    //       'title': 'Business Development',
-    //       'company_name': 'Cultfit',
-    //       'salary': '₹ 1,20,000 - 3,00,000 P.A',
-    //       'location': 'Bengaluru',
-    //       'icon_uri':
-    //           'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/sales-fa.svg',
-    //     },
-    //     {
-    //       'title': 'Operations Executive',
-    //       'company_name': 'Swiggy',
-    //       'salary': '₹ 1,20,000 - 3,00,000 P.A',
-    //       'location': 'Bengaluru',
-    //       'icon_uri':
-    //           'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/operations-executive-fa.svg',
-    //     },
-    //   ]
-    // });
   }
 }

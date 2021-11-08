@@ -31,7 +31,6 @@ class Congrates extends StatelessWidget {
     // calculate total mark
     // context.read<ExamEvaluateModal>().markScored();
     Provider.of<ExamEvaluateModal>(context, listen: false).markScored();
-
     int _markScored =
         Provider.of<ExamEvaluateModal>(context, listen: false).mark_scored;
 

@@ -27,9 +27,25 @@ class SupabaseService {
 
   Future<PostgrestResponse> query(String table, String select) async {
     // query data
-    final selectResponse =
-        await client.from('jobs').select('*').execute(count: CountOption.exact);
+    final selectResponse = await client
+        .from(table)
+        .select(select)
+        .execute(count: CountOption.exact);
     // print("select Response $selectResponse");
+
+    return selectResponse;
+  }
+
+  Future<PostgrestResponse> filter(
+      String table, String eqColumnName, dynamic value) async {
+    // query data
+    final selectResponse = await client
+        .from(table)
+        .select('*')
+        .eq(eqColumnName, value)
+        .execute(count: CountOption.exact);
+
+    print("select Response ${selectResponse.data.length}");
 
     return selectResponse;
   }

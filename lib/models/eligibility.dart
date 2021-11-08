@@ -6,6 +6,9 @@ class ExamEvaluateModal with ChangeNotifier {
   var _question_answer_mark = new Map<String, int>();
   var _quesion_answer = new Map<String, String>();
   var _job_selected = new Map<String, dynamic>();
+
+  // JSON is been converted to string and been moved around in state
+  String _ques_journey = "";
   String _mobile = "";
 
   int _mark_scored = 0;
@@ -20,7 +23,13 @@ class ExamEvaluateModal with ChangeNotifier {
 
   Map get job_selected => _job_selected;
 
+  get ques_journey => _ques_journey;
+
   String get mobile => _mobile;
+
+  void set_ques_journey(journey) {
+    _ques_journey = journey;
+  }
 
   void job_select(Map job) {
     _job_selected = job;
@@ -63,7 +72,7 @@ class ExamEvaluateModal with ChangeNotifier {
     var values = _question_answer_mark.values;
     _mark_scored = values.reduce((sum, element) => sum + element);
 
-    notifyListeners();
+    // notifyListeners();
   }
 
   void increment() {
