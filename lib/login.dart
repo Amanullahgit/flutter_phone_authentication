@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:phone_auth_project/otp.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import './widgets/button_widget.dart';
+import './form_builder/json_schema.dart';
 import './../models/eligibility.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +15,22 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _controller = TextEditingController();
+
+  String form = json.encode({
+    'disclaimer': "By continuing you agree to our Terms and Condition",
+    'fields': [
+      {
+        'name': 'mobile',
+        'type': 'TextInput',
+        'keyboardType': 'number',
+        'labelText': "Enter 10 digit phone number",
+        // not work
+        "validation": {
+          "required": true,
+        }
+      },
+    ]
+  });
 
   List<Map> _categories = [
     {
@@ -50,176 +68,147 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Dashhire'),
         ),
-        body: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              child: GridView.count(
-                  padding: EdgeInsets.all(16),
-                  // Create a grid with 2 columns. If you change the scrollDirection to
-                  // horizontal, this produces 2 rows.
-                  crossAxisCount: 3,
-                  // Generate 100 widgets that display their index in the List.
-                  children: [
-                    Column(
-                      children: [
-                        SvgPicture.network(
-                          'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/telesales-fa.svg',
-                          semanticsLabel: 'Telemarketing',
-                          placeholderBuilder: (BuildContext context) =>
-                              Container(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: const CircularProgressIndicator()),
-                        ),
-                        Text(
-                          'Telemarketing',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 12),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SvgPicture.network(
-                          'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/operations-executive-fa.svg',
-                          semanticsLabel: 'A shark?!',
-                          placeholderBuilder: (BuildContext context) =>
-                              Container(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: const CircularProgressIndicator()),
-                        ),
-                        Text(
-                          "Operations Executive",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 12),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SvgPicture.network(
-                          'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/back-office-fa.svg',
-                          semanticsLabel: 'A shark?!',
-                          placeholderBuilder: (BuildContext context) =>
-                              Container(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: const CircularProgressIndicator()),
-                        ),
-                        Text(
-                          "Back Office Executive",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 12),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SvgPicture.network(
-                          'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/sales-fa.svg',
-                          semanticsLabel: 'A shark?!',
-                          placeholderBuilder: (BuildContext context) =>
-                              Container(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: const CircularProgressIndicator()),
-                        ),
-                        Text(
-                          "Business Development",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 12),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SvgPicture.network(
-                          'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/delivery-fa.svg',
-                          semanticsLabel: 'A shark?!',
-                          placeholderBuilder: (BuildContext context) =>
-                              Container(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: const CircularProgressIndicator()),
-                        ),
-                        Text(
-                          "Delivery boy",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 12),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SvgPicture.network(
-                          'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/customer-care-fa.svg',
-                          semanticsLabel: 'A shark?!',
-                          placeholderBuilder: (BuildContext context) =>
-                              Container(
-                                  padding: const EdgeInsets.all(30.0),
-                                  child: const CircularProgressIndicator()),
-                        ),
-                        Text(
-                          "Customer Care",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 12),
-                        )
-                      ],
-                    ),
-                  ]),
-            ),
-            Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Column(children: [
-                    Container(
-                      color: Colors.white,
-                      margin: EdgeInsets.only(top: 40, right: 10, left: 10),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Enter 10 digit phone number',
-                          prefix: Padding(
-                            padding: EdgeInsets.all(4),
-                            child: Text('+91'),
+        body: SingleChildScrollView(
+          child: Column(
+            // alignment: Alignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 15,
+                    children: [
+                      Column(
+                        children: [
+                          SizedBox(),
+                          SvgPicture.network(
+                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/telesales-fa.svg',
+                            semanticsLabel: 'Telemarketing',
+                            placeholderBuilder: (BuildContext context) =>
+                                Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const CircularProgressIndicator()),
                           ),
-                          border: OutlineInputBorder(),
-                        ),
-                        maxLength: 10,
-                        keyboardType: TextInputType.number,
-                        controller: _controller,
+                          Text(
+                            'Telemarketing',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 12),
+                          )
+                        ],
                       ),
-                    )
-                  ]),
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    width: double.infinity,
-                    child: Column(
-                      children: [
-                        RoundedButtonWidget(
-                          onPressed: () {
-                            if (_controller.text.length == 10) {
-                              // INFO: save user mobile
-                              Provider.of<ExamEvaluateModal>(context,
-                                      listen: false)
-                                  .set_mobile(_controller.text);
-
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) =>
-                                      OTPScreen(_controller.text)));
-                            }
-                          },
-                          buttonText: 'Continue',
-                        ),
-                        Text(
-                            'By continuing you agree to our Terms and Condition')
-                      ],
-                    ),
-                  ),
-                ],
+                      Column(
+                        children: [
+                          SvgPicture.network(
+                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/operations-executive-fa.svg',
+                            semanticsLabel: 'A shark?!',
+                            placeholderBuilder: (BuildContext context) =>
+                                Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const CircularProgressIndicator()),
+                          ),
+                          Text(
+                            "Operations Executive",
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 12),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          SvgPicture.network(
+                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/back-office-fa.svg',
+                            semanticsLabel: 'A shark?!',
+                            placeholderBuilder: (BuildContext context) =>
+                                Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const CircularProgressIndicator()),
+                          ),
+                          Text(
+                            "Back Office Executive",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 12),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          SvgPicture.network(
+                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/sales-fa.svg',
+                            semanticsLabel: 'A shark?!',
+                            placeholderBuilder: (BuildContext context) =>
+                                Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const CircularProgressIndicator()),
+                          ),
+                          Text(
+                            "Business Development",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 12),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          SvgPicture.network(
+                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/delivery-fa.svg',
+                            semanticsLabel: 'A shark?!',
+                            placeholderBuilder: (BuildContext context) =>
+                                Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const CircularProgressIndicator()),
+                          ),
+                          Text(
+                            "Delivery boy",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 12),
+                          )
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          SvgPicture.network(
+                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/customer-care-fa.svg',
+                            semanticsLabel: 'A shark?!',
+                            placeholderBuilder: (BuildContext context) =>
+                                Container(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: const CircularProgressIndicator()),
+                          ),
+                          Text(
+                            "Customer Care",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 12),
+                          )
+                        ],
+                      ),
+                    ]),
               ),
-            )
-          ],
+              Container(
+                child: JsonSchema(
+                    // INFO: response here is context
+                    onSubmitSave: (dynamic response, _formKey) {
+                      String mobile =
+                          _formKey.currentState.fields['mobile'].value;
+
+                      // INFO: save user mobile
+                      Provider.of<ExamEvaluateModal>(context, listen: false)
+                          .set_mobile(mobile);
+
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => OTPScreen(mobile)));
+
+                      print("response $response");
+                    },
+                    form: form),
+              ),
+            ],
+          ),
         ));
   }
 }

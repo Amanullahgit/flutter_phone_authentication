@@ -112,54 +112,53 @@ class _QuestionJourneyState extends State<QuestionJourney> {
                     title: new Text("Test"),
                     automaticallyImplyLeading: true,
                   ),
-                  body: new Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          color: Theme.of(context).secondaryHeaderColor,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("$company_name"),
-                              Text(
-                                  "${widget.screenIndex + 1} / ${_getScreenCount()}")
-                            ],
+                  body: SingleChildScrollView(
+                    child: new Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Container(
+                            color: Theme.of(context).secondaryHeaderColor,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("$company_name"),
+                                Text(
+                                    "${widget.screenIndex + 1} / ${_getScreenCount()}")
+                              ],
+                            ),
                           ),
-                        ),
-                        JsonSchema(
-                            // INFO: response here is context
-                            onSubmitSave: (dynamic response, _formKey) {
-                              print("response $response");
+                          JsonSchema(
+                              // INFO: response here is context
+                              onSubmitSave: (dynamic response, _formKey) {
+                                print("response $response");
 
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => new Congrates()));
+                                // INFO: on question submit update marks attained by user
+                                // response.read<ExamEvaluateModal>().assignMark();
 
-                              // INFO: on question submit update marks attained by user
-                              // response.read<ExamEvaluateModal>().assignMark();
+                                // INFO: use screenIndex to pull out json object from screens json passed
+                                // TODO: This condition should be tight
+                                // When screenIndex == _getScreenCount() index error occur
 
-                              // INFO: use screenIndex to pull out json object from screens json passed
-                              // TODO: This condition should be tight
-                              // When screenIndex == _getScreenCount() index error occur
-
-                              if (widget.screenIndex == _getScreenCount() - 1) {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => new Congrates()));
-                              } else {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            new QuestionJourney(
-                                                screenIndex:
-                                                    widget.screenIndex + 1)));
-                              }
-                            },
-                            form: _getFormScreen()),
-                      ]));
+                                if (widget.screenIndex ==
+                                    _getScreenCount() - 1) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              new Congrates()));
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              new QuestionJourney(
+                                                  screenIndex:
+                                                      widget.screenIndex + 1)));
+                                }
+                              },
+                              form: _getFormScreen()),
+                        ]),
+                  ));
           }
         });
   }

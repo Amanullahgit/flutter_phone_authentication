@@ -214,10 +214,12 @@ class _CoreFormState extends State<JsonSchema> {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
+    return Container(
+      // When parent using SingleChildScrollView
+      // Flexible and Expanded widgets un-usable
       // INFO: does not work with more that 3 fields in one page
       // flex:1,
-      fit: FlexFit.loose,
+      // fit: FlexFit.loose,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
