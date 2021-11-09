@@ -66,7 +66,22 @@ class _HomeScreenState extends State<HomeScreen> {
             else
               return new Scaffold(
                 appBar: new AppBar(
-                    title: new Text("Jobs"), automaticallyImplyLeading: true),
+                  title: new Text("Jobs"),
+                  automaticallyImplyLeading: true,
+                  actions: [
+                    IconButton(
+                      icon: Icon(Icons.logout),
+                      onPressed: () async {
+                        await FirebaseAuth.instance.signOut();
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                            (route) => false);
+                      },
+                    )
+                  ],
+                ),
                 body: ListView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,

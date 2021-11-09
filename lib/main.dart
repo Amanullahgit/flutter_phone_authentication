@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
 import 'package:phone_auth_project/home_list.dart';
 import 'package:phone_auth_project/login.dart';
 import 'package:provider/provider.dart';
@@ -50,6 +52,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.deepPurpleAccent),
       // home: Congrates(),
       debugShowCheckedModeBanner: false,
+      builder: EasyLoading.init(),
     );
   }
 }

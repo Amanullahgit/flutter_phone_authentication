@@ -40,6 +40,7 @@ dependencies:
   video_player: ^2.2.6
   flutter_svg: ^0.23.0+1
   supabase: ^0.2.9
+  flutter_easyloading: ^3.0.3
 
 
 dev_dependencies:
