@@ -214,9 +214,10 @@ class _CoreFormState extends State<JsonSchema> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Flexible(
       // INFO: does not work with more that 3 fields in one page
-      // flex: 1,
+      // flex:1,
+      fit: FlexFit.loose,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(

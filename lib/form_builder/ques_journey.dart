@@ -107,8 +107,11 @@ class _QuestionJourneyState extends State<QuestionJourney> {
               return Center(child: Text('Error: ${snapshot.error}'));
             else
               return new Scaffold(
+                  resizeToAvoidBottomInset: false,
                   appBar: new AppBar(
-                      title: new Text("Test"), automaticallyImplyLeading: true),
+                    title: new Text("Test"),
+                    automaticallyImplyLeading: true,
+                  ),
                   body: new Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
