@@ -116,10 +116,23 @@ class _OTPScreenState extends State<OTPScreen> {
               .signInWithCredential(credential)
               .then((value) async {
             if (value.user != null) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => OnboardingScreen()),
-                  (route) => false);
+              SupabaseService supabase = new SupabaseService();
+              // TODO: This filter does nor works
+              final selectResponse =
+                  await supabase.filter("onboarding", "mobile", widget.phone);
+
+              final List data = selectResponse.data;
+              if (data.length == 0) {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => OnboardingScreen()),
+                    (route) => false);
+              } else {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                    (route) => false);
+              }
             }
           });
         },
