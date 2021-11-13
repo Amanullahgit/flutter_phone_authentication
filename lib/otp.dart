@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:phone_auth_project/home_list.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timer_button/timer_button.dart';
 
 import 'form_builder/onboard_form.dart';
 import './utils/supabase_service.dart';
@@ -106,11 +107,23 @@ class _OTPScreenState extends State<OTPScreen> {
               },
             ),
           ),
-          TextButton(
-              onPressed: () {
-                _verifyPhone();
-              },
-              child: Text('Resend otp'))
+          new TimerButton(
+            label: "Resend OTP",
+            timeOutInSeconds: 20,
+            onPressed: () {
+              _verifyPhone();
+            },
+            disabledColor: Colors.grey,
+            color: Colors.deepPurple,
+            buttonType: ButtonType.RaisedButton,
+            disabledTextStyle: new TextStyle(fontSize: 12.0),
+            activeTextStyle: new TextStyle(fontSize: 12.0, color: Colors.white),
+          ),
+          // TextButton(
+          //     onPressed: () {
+          //       _verifyPhone();
+          //     },
+          //     child: Text('Resend otp'))
         ],
       ),
     );

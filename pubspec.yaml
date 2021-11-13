@@ -41,6 +41,7 @@ dependencies:
   flutter_svg: ^0.23.0+1
   supabase: ^0.2.9
   flutter_easyloading: ^3.0.3
+  timer_button: ^2.0.0
 
 
 dev_dependencies:
