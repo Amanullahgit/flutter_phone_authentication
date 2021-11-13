@@ -7,6 +7,7 @@ import 'package:phone_auth_project/home_list.dart';
 import 'package:phone_auth_project/login.dart';
 import 'package:provider/provider.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './common/theme.dart';
 import './models/eligibility.dart';
@@ -34,26 +35,53 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  Future<String> userId;
+  bool isLoggedIn;
+
+  Future<void> _userLoggedIn() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    isLoggedIn = (prefs.getBool('isLoggedIn') == null)
+        ? false
+        : prefs.getBool('isLoggedIn');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Dashhire',
-      theme: appTheme,
-      home: AnimatedSplashScreen(
-          duration: 1000,
-          splash: Text(
-            "Dashhire",
-            style: TextStyle(
-                color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold),
-          ),
-          nextScreen: LoginScreen(),
-          splashTransition: SplashTransition.fadeTransition,
-          backgroundColor: Colors.deepPurpleAccent),
-      // home: Congrates(),
-      debugShowCheckedModeBanner: false,
-      builder: EasyLoading.init(),
-    );
+    return FutureBuilder(
+        future: _userLoggedIn(), // function where you call your api
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            print("IsLoggedIn++++++++++++++++++++++++++++ $isLoggedIn");
+            Widget firstWidget;
+
+            // Assign widget based on availability of currentUser
+            if (isLoggedIn != null && isLoggedIn == true) {
+              firstWidget = HomeScreen();
+            } else {
+              firstWidget = LoginScreen();
+            }
+            return MaterialApp(
+              title: 'Dashhire',
+              theme: appTheme,
+              home: AnimatedSplashScreen(
+                  duration: 1000,
+                  splash: Text(
+                    "Dashhire",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  nextScreen: firstWidget,
+                  splashTransition: SplashTransition.fadeTransition,
+                  backgroundColor: Colors.deepPurpleAccent),
+              // home: Congrates(),
+              debugShowCheckedModeBanner: false,
+              builder: EasyLoading.init(),
+            );
+          }
+        });
   }
 }

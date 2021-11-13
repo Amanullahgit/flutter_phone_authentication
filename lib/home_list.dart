@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:phone_auth_project/login.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:supabase/supabase.dart' as supabase;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './form_builder/ques_journey.dart';
 import './../models/eligibility.dart';
@@ -19,9 +19,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String uid;
   String data;
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   int _getTotalJobs() {
-    final totalJobs = json.decode(data)['jobs'].length;
+    final totalJobs = json.decode(data)['jobs']?.length ?? 0;
 
     return totalJobs;
   }
@@ -53,6 +54,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return data;
   }
 
+  Future<void> _setUserLoggedIn() async {
+    final SharedPreferences prefs = await _prefs;
+    // Use isLoggedIn as a checker around the application
+    prefs.setBool("isLoggedIn", false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -73,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       icon: Icon(Icons.logout),
                       onPressed: () async {
                         await FirebaseAuth.instance.signOut();
+                        _setUserLoggedIn();
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:phone_auth_project/home_list.dart';
 import 'package:pinput/pin_put/pin_put.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'form_builder/onboard_form.dart';
 import './utils/supabase_service.dart';
 
@@ -13,6 +15,10 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
+  // User related
+  String uid;
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String _verificationCode;
   final TextEditingController _pinPutController = TextEditingController();
@@ -60,6 +66,8 @@ class _OTPScreenState extends State<OTPScreen> {
                           verificationId: _verificationCode, smsCode: pin))
                       .then((value) async {
                     if (value.user != null) {
+                      _setUserLoggedIn();
+
                       String phone = widget.phone;
 
                       SupabaseService supabase = new SupabaseService();
@@ -108,6 +116,12 @@ class _OTPScreenState extends State<OTPScreen> {
     );
   }
 
+  Future<void> _setUserLoggedIn() async {
+    final SharedPreferences prefs = await _prefs;
+    // Use isLoggedIn as a checker around the application
+    prefs.setBool("isLoggedIn", true);
+  }
+
   _verifyPhone() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: '+91${widget.phone}',
@@ -116,6 +130,8 @@ class _OTPScreenState extends State<OTPScreen> {
               .signInWithCredential(credential)
               .then((value) async {
             if (value.user != null) {
+              _setUserLoggedIn();
+              // Check from supabase if user has already onboarded
               SupabaseService supabase = new SupabaseService();
               // TODO: This filter does nor works
               final selectResponse =
