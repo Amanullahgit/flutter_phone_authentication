@@ -83,6 +83,7 @@ class Congrates extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: Text('Please wait its loading...'));
           } else {
+            // TODO: Business logic what happens when API has error
             if (snapshot.hasError)
               return Center(child: Text('Error: ${snapshot.error}'));
             else {

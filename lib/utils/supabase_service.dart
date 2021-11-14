@@ -45,7 +45,7 @@ class SupabaseService {
         .eq(eqColumnName, value)
         .execute(count: CountOption.exact);
 
-    print("select Response ${selectResponse.data.length}");
+    // print("select Response ${selectResponse.data?.length}");
 
     return selectResponse;
   }
