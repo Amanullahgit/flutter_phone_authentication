@@ -9,7 +9,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import './form_builder/ques_journey.dart';
 import './../models/eligibility.dart';
-import './utils/supabase_service.dart';
+// import './utils/supabase_service.dart';
+
+// Avoid namespace conflict with Providers
+import 'package:supabase/supabase.dart' as supa;
+import './common/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -34,8 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   dynamic getJobListing() async {
-    SupabaseService supabase = new SupabaseService();
-    final selectResponse = await supabase.query("jobs", "*");
+    // final selectResponse = await supabase.query("jobs", "*");
+
+    final client = supa.SupabaseClient(
+        SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
+
+    final selectResponse = await client.rpc('get_job_list', params: {
+      'company_code_param': 'DASH_20',
+      'mobile_number_param': '9953186837'
+    }).execute();
 
     data = json.encode({});
 

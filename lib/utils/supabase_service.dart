@@ -1,19 +1,19 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:supabase/supabase.dart';
+import './../common/constants.dart';
 
 class SupabaseService {
   SupabaseService() {
-    final String supabaseUrl = "";
-    final String supabaseKey = "";
-
-    final client = SupabaseClient('https://nquwrxpqaiohypvambqs.supabase.co',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzNDI5NDc0OSwiZXhwIjoxOTQ5ODcwNzQ5fQ.78qQYcAGImoc5oAxZC9WMs5DGDYMVjsCWb8qYMhNFUA');
+    final client =
+        SupabaseClient(SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
 
     this.client = client;
   }
 
   dynamic client;
+
+  get mySupabaseClient => client;
 
   dynamic response(supaResponse) {
     if (supaResponse.error == null) {
