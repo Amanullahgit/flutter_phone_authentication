@@ -58,7 +58,8 @@ class MyApp extends StatelessWidget {
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            print("IsLoggedIn++++++++++++++++++++++++++++ $isLoggedIn");
+            print(
+                "IsLoggedIn+++ mobile+++++++++++++++++++++++++ $isLoggedIn $mobile");
             Widget firstWidget;
 
             // Assign widget based on availability of currentUser
