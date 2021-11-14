@@ -6,6 +6,7 @@ class ExamEvaluateModal with ChangeNotifier {
   var _question_answer_mark = new Map<String, int>();
   var _quesion_answer = new Map<String, String>();
   var _job_selected = new Map<String, dynamic>();
+  String _company_code = "";
 
   // JSON is been converted to string and been moved around in state
   String _ques_journey = "";
@@ -26,6 +27,12 @@ class ExamEvaluateModal with ChangeNotifier {
   get ques_journey => _ques_journey;
 
   String get mobile => _mobile;
+
+  String get company_code => _company_code;
+
+  void set_company_code(code) {
+    _company_code = code;
+  }
 
   void set_ques_journey(journey) {
     _ques_journey = journey;
