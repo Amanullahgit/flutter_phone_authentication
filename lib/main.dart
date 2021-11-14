@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:phone_auth_project/congrates.dart';
 import 'package:phone_auth_project/form_builder/onboard_form.dart';
 
 import 'package:phone_auth_project/home_list.dart';
@@ -12,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './common/theme.dart';
 import './models/eligibility.dart';
 
+import './company_code.dart';
 // import './components/video_full.dart';
 // import './models/shared_preferences.dart';
 // import './models/user.dart';
@@ -37,12 +39,15 @@ void main() async {
 class MyApp extends StatelessWidget {
   Future<String> userId;
   bool isLoggedIn;
+  String mobile;
 
   Future<void> _userLoggedIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     isLoggedIn = (prefs.getBool('isLoggedIn') == null)
         ? false
         : prefs.getBool('isLoggedIn');
+
+    mobile = prefs.getString("mobile");
   }
 
   @override
@@ -58,6 +63,9 @@ class MyApp extends StatelessWidget {
 
             // Assign widget based on availability of currentUser
             if (isLoggedIn != null && isLoggedIn == true) {
+              // INFO: save user mobile to state from shared_pref
+              Provider.of<ExamEvaluateModal>(context, listen: false)
+                  .set_mobile(mobile);
               firstWidget = HomeScreen();
             } else {
               firstWidget = LoginScreen();
