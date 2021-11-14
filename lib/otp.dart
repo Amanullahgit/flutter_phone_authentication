@@ -84,17 +84,20 @@ class _OTPScreenState extends State<OTPScreen> {
               },
             ),
           ),
+          SizedBox(
+            height: 60,
+          ),
           new TimerButton(
             label: "Resend OTP",
-            timeOutInSeconds: 20,
+            timeOutInSeconds: 50,
             onPressed: () {
               _verifyPhone();
             },
             disabledColor: Colors.grey,
-            color: Colors.deepPurple,
+            color: Colors.deepPurple[400],
             buttonType: ButtonType.RaisedButton,
-            disabledTextStyle: new TextStyle(fontSize: 12.0),
-            activeTextStyle: new TextStyle(fontSize: 12.0, color: Colors.white),
+            disabledTextStyle: new TextStyle(fontSize: 10.0),
+            activeTextStyle: new TextStyle(fontSize: 10.0, color: Colors.white),
           ),
           // TextButton(
           //     onPressed: () {

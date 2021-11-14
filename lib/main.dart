@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
               // INFO: save user mobile to state from shared_pref
               Provider.of<ExamEvaluateModal>(context, listen: false)
                   .set_mobile(mobile);
-              firstWidget = HomeScreen();
+              firstWidget = CompanyCodeScreen();
             } else {
               firstWidget = LoginScreen();
             }
