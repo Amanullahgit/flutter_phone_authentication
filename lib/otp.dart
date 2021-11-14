@@ -95,9 +95,10 @@ class _OTPScreenState extends State<OTPScreen> {
             },
             disabledColor: Colors.grey,
             color: Colors.deepPurple[400],
-            buttonType: ButtonType.RaisedButton,
+            buttonType: ButtonType.OutlinedButton,
             disabledTextStyle: new TextStyle(fontSize: 10.0),
-            activeTextStyle: new TextStyle(fontSize: 10.0, color: Colors.white),
+            activeTextStyle:
+                new TextStyle(fontSize: 10.0, color: Colors.deepPurpleAccent),
           ),
           // TextButton(
           //     onPressed: () {

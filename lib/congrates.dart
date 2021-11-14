@@ -128,7 +128,7 @@ class Congrates extends StatelessWidget {
                     //Text
                     MaterialButton(
                       child: Text(
-                        'Restart Quiz!',
+                        'Goto jobs listing',
                       ), //Text
                       textColor: Colors.blue,
                       onPressed: () {

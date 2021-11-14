@@ -35,7 +35,7 @@ class _CompanyCodeScreenState extends State<CompanyCodeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.purpleAccent[100],
+      color: Colors.deepPurpleAccent[100],
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
