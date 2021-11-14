@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final selectResponse = await client.rpc('get_job_list', params: {
       'company_code_param': 'DASH_20',
-      'mobile_number_param': '9953186837'
+      'mobile_number_param': '8011230914'
     }).execute();
 
     data = json.encode({});
@@ -69,6 +69,17 @@ class _HomeScreenState extends State<HomeScreen> {
     final SharedPreferences prefs = await _prefs;
     // Use isLoggedIn as a checker around the application
     prefs.setBool("isLoggedIn", false);
+  }
+
+  Widget _noJobCard() {
+    return Center(
+      child: Container(
+        child: Text(
+          "No Jobs listed, Contact us",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
   }
 
   @override
@@ -101,105 +112,110 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ],
                 ),
-                body: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: _getTotalJobs(), // the length
-                    itemBuilder: (context, index) {
-                      String title = _getJob(index)['title'];
-                      String company_name = _getJob(index)['company_name'];
-                      String location = _getJob(index)['location'];
-                      String salary = _getJob(index)['salary'];
+                body: _getTotalJobs() == 0
+                    ? _noJobCard()
+                    : ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: _getTotalJobs(), // the length
+                        itemBuilder: (context, index) {
+                          String title = _getJob(index)['title'];
+                          String company_name = _getJob(index)['company_name'];
+                          String location = _getJob(index)['location'];
+                          String salary = _getJob(index)['salary'];
 
-                      return Container(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Card(
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  // leading: Icon(Icons.arrow_drop_down_circle),
-                                  title: Text(
-                                    "$title",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(Icons.work),
-                                          Text('$company_name'),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(Icons.location_city),
-                                          Text('$location'),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  trailing: SvgPicture.network(
-                                    _getJob(index)['icon_uri'],
-                                    semanticsLabel: 'A shark?!',
-                                    placeholderBuilder:
-                                        (BuildContext context) => Container(
-                                            padding: const EdgeInsets.all(30.0),
-                                            child:
-                                                const CircularProgressIndicator()),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.money),
-                                      Text(
-                                        '$salary',
-                                        style: TextStyle(
-                                            color:
-                                                Colors.black.withOpacity(0.6)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                ButtonBar(
-                                  alignment: MainAxisAlignment.end,
+                          return Container(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Card(
+                                child: Column(
                                   children: [
-                                    Text(
-                                      "Test comprises of MCQ and aptitude",
-                                      style: TextStyle(fontSize: 10),
-                                    ),
-                                    MaterialButton(
-                                      color: Theme.of(context).primaryColor,
-                                      onPressed: () {
-                                        // maintain state: job_selected
-                                        Provider.of<ExamEvaluateModal>(context,
-                                                listen: false)
-                                            .job_select(_getJob(index));
-
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  new QuestionJourney(
-                                                      screenIndex: 0)),
-                                        );
-                                      },
-                                      child: const Text(
-                                        'Start Test',
-                                        style: TextStyle(color: Colors.white),
+                                    ListTile(
+                                      // leading: Icon(Icons.arrow_drop_down_circle),
+                                      title: Text(
+                                        "$title",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(Icons.work),
+                                              Text('$company_name'),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.location_city),
+                                              Text('$location'),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      trailing: SvgPicture.network(
+                                        _getJob(index)['icon_uri'],
+                                        semanticsLabel: 'A shark?!',
+                                        placeholderBuilder:
+                                            (BuildContext context) => Container(
+                                                padding:
+                                                    const EdgeInsets.all(30.0),
+                                                child:
+                                                    const CircularProgressIndicator()),
                                       ),
                                     ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.money),
+                                          Text(
+                                            '$salary',
+                                            style: TextStyle(
+                                                color: Colors.black
+                                                    .withOpacity(0.6)),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    ButtonBar(
+                                      alignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          "Test comprises of MCQ and aptitude",
+                                          style: TextStyle(fontSize: 10),
+                                        ),
+                                        MaterialButton(
+                                          color: Theme.of(context).primaryColor,
+                                          onPressed: () {
+                                            // maintain state: job_selected
+                                            Provider.of<ExamEvaluateModal>(
+                                                    context,
+                                                    listen: false)
+                                                .job_select(_getJob(index));
+
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      new QuestionJourney(
+                                                          screenIndex: 0)),
+                                            );
+                                          },
+                                          child: const Text(
+                                            'Start Test',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    // Image.asset('assets/card-sample-image-2.jpg'),
                                   ],
                                 ),
-                                // Image.asset('assets/card-sample-image-2.jpg'),
-                              ],
-                            ),
-                          ));
-                    }),
+                              ));
+                        }),
               ); // snapshot.data  :- get your object which is pass from your downloadData() function
           }
         });
