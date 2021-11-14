@@ -86,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           SizedBox(),
                           SvgPicture.network(
-                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/telesales-fa.svg',
+                            'https://res.cloudinary.com/dmtuysbcn/image/upload/v1636916808/icons/telesales-fa_vuzdl5.svg',
                             semanticsLabel: 'Telemarketing',
                             placeholderBuilder: (BuildContext context) =>
                                 Container(
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Column(
                         children: [
                           SvgPicture.network(
-                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/operations-executive-fa.svg',
+                            'https://res.cloudinary.com/dmtuysbcn/image/upload/v1636916776/icons/operations-executive-fa_x6s16j.svg',
                             semanticsLabel: 'A shark?!',
                             placeholderBuilder: (BuildContext context) =>
                                 Container(
@@ -122,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Column(
                         children: [
                           SvgPicture.network(
-                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/back-office-fa.svg',
+                            'https://res.cloudinary.com/dmtuysbcn/image/upload/v1636916749/icons/back-office-fa_nks9lf.svg',
                             semanticsLabel: 'A shark?!',
                             placeholderBuilder: (BuildContext context) =>
                                 Container(
@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Column(
                         children: [
                           SvgPicture.network(
-                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/sales-fa.svg',
+                            'https://res.cloudinary.com/dmtuysbcn/image/upload/v1636916721/icons/sales-fa_r7ztla.svg',
                             semanticsLabel: 'A shark?!',
                             placeholderBuilder: (BuildContext context) =>
                                 Container(
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Column(
                         children: [
                           SvgPicture.network(
-                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/delivery-fa.svg',
+                            'https://res.cloudinary.com/dmtuysbcn/image/upload/v1636916694/icons/delivery-fa_cda5zg.svg',
                             semanticsLabel: 'A shark?!',
                             placeholderBuilder: (BuildContext context) =>
                                 Container(
@@ -173,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Column(
                         children: [
                           SvgPicture.network(
-                            'https://olxjobs-static.aasaanjobs.net/candidate_web/OlxIntegration/customer-care-fa.svg',
+                            'https://res.cloudinary.com/dmtuysbcn/image/upload/v1636916653/icons/customer-care-fa_bmur7g.svg',
                             semanticsLabel: 'A shark?!',
                             placeholderBuilder: (BuildContext context) =>
                                 Container(
