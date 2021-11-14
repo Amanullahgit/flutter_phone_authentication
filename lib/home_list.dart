@@ -40,12 +40,20 @@ class _HomeScreenState extends State<HomeScreen> {
   dynamic getJobListing() async {
     // final selectResponse = await supabase.query("jobs", "*");
 
+    String mobile =
+        Provider.of<ExamEvaluateModal>(context, listen: false).mobile;
+
+    String companyCode =
+        Provider.of<ExamEvaluateModal>(context, listen: false).company_code;
+
+    print("getJobListing >>>>>> $mobile $companyCode");
+
     final client = supa.SupabaseClient(
         SupaConstants.supabaseUrl, SupaConstants.supabaseKey);
 
     final selectResponse = await client.rpc('get_job_list', params: {
-      'company_code_param': 'DASH_20',
-      'mobile_number_param': '8011230914'
+      'company_code_param': companyCode,
+      'mobile_number_param': mobile
     }).execute();
 
     data = json.encode({});
