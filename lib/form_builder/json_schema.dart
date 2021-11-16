@@ -115,6 +115,12 @@ class _CoreFormState extends State<JsonSchema> {
       if (item['type'] == "TextInput") {
         String prefix = item['prefix'] ?? "";
         String keyboardType = item['keyboardType'] ?? "";
+        bool validation = item['validation'] != null ? true : false;
+        dynamic validator = validation
+            ? (item['validation']['required']
+                ? FormBuilderValidators.required(context)
+                : null)
+            : null;
 
         // fieldController = TextFie
         listWidget.add(new FormBuilderTextField(
@@ -131,11 +137,9 @@ class _CoreFormState extends State<JsonSchema> {
           onChanged: (val) {
             print("val $val");
           },
-          validator: FormBuilderValidators.compose([
-            FormBuilderValidators.required(context),
-          ]),
+          validator: validator,
           keyboardType: keyboardType == 'number'
-              ? TextInputType.phone
+              ? TextInputType.number
               : TextInputType.name,
           textInputAction: TextInputAction.next,
         ));

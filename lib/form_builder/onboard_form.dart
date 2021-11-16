@@ -74,7 +74,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
         'labelText': "Job Title",
         // not work
         "validation": {
-          "required": true,
+          "required": false,
         }
       },
       {
@@ -83,7 +83,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
         'labelText': "Current Company Name",
         // not work
         "validation": {
-          "required": true,
+          "required": false,
         }
       },
       {
@@ -92,7 +92,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
         'prefix': '₹',
         'labelText': "Current montly income",
         "validation": {
-          "required": true,
+          "required": false,
         },
         // not work
         "keyboardType": 'number'
