@@ -113,6 +113,7 @@ class _CoreFormState extends State<JsonSchema> {
       // var fieldController;
 
       if (item['type'] == "TextInput") {
+        String prefix = item['prefix'] ?? "";
         // fieldController = TextFie
         listWidget.add(new FormBuilderTextField(
           // controller: fieldController,
@@ -121,7 +122,7 @@ class _CoreFormState extends State<JsonSchema> {
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: item['labelText'],
-
+            prefix: Text(prefix),
             // helperText: 'Helper text',
             // hintText: 'Hint text',
           ),

@@ -89,6 +89,7 @@ class _OnboardingScreen extends State<OnboardingScreen> {
       {
         'name': 'currentMonthlyIncome',
         'type': 'TextInput',
+        'prefix': '₹',
         'labelText': "Current montly income",
         "validation": {
           "required": true,

@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
     'fields': [
       {
         'name': 'mobile',
+        'prefix': '+91',
         'type': 'TextInput',
         'keyboardType': 'number',
         'labelText': "Enter 10 digit phone number",
