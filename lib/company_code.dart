@@ -22,7 +22,6 @@ class _CompanyCodeScreenState extends State<CompanyCodeScreen> {
       {
         'name': 'companyCode',
         'type': 'TextInput',
-        'keyboardType': 'number',
         'labelText': "Enter Company Code",
         // not work
         "validation": {
