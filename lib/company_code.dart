@@ -34,51 +34,56 @@ class _CompanyCodeScreenState extends State<CompanyCodeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.deepPurpleAccent[100],
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: Text(""),
-          ),
-          Container(
-            child: JsonSchema(
-                // INFO: response here is context
-                onSubmitSave: (dynamic response, _formKey) async {
-                  String companyCode =
-                      _formKey.currentState.fields['companyCode'].value;
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Company code'),
+      ),
+      body: Container(
+        // color: Colors.deepPurpleAccent[100],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              child: Text(""),
+            ),
+            Container(
+              child: JsonSchema(
+                  // INFO: response here is context
+                  onSubmitSave: (dynamic response, _formKey) async {
+                    String companyCode =
+                        _formKey.currentState.fields['companyCode'].value;
 
-                  // INFO: save company code to state
-                  Provider.of<ExamEvaluateModal>(context, listen: false)
-                      .set_company_code(companyCode);
+                    // INFO: save company code to state
+                    Provider.of<ExamEvaluateModal>(context, listen: false)
+                        .set_company_code(companyCode);
 
-                  var mobile =
-                      Provider.of<ExamEvaluateModal>(context, listen: false)
-                          .mobile;
+                    var mobile =
+                        Provider.of<ExamEvaluateModal>(context, listen: false)
+                            .mobile;
 
-                  SupabaseService supabase = new SupabaseService();
-                  // TODO: This filter does not works for mobile: +918011230914
-                  final selectResponse =
-                      await supabase.filter("onboarding", "mobile", mobile);
+                    SupabaseService supabase = new SupabaseService();
+                    // TODO: This filter does not works for mobile: +918011230914
+                    final selectResponse =
+                        await supabase.filter("onboarding", "mobile", mobile);
 
-                  final List data = selectResponse.data;
-                  if (data.length == 0) {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OnboardingScreen()),
-                        (route) => false);
-                  } else {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                        (route) => false);
-                  }
-                },
-                form: form),
-          ),
-        ],
+                    final List data = selectResponse.data;
+                    if (data.length == 0) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OnboardingScreen()),
+                          (route) => false);
+                    } else {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
+                          (route) => false);
+                    }
+                  },
+                  form: form),
+            ),
+          ],
+        ),
       ),
     );
   }
