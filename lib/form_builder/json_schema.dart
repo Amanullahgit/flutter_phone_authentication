@@ -114,6 +114,8 @@ class _CoreFormState extends State<JsonSchema> {
 
       if (item['type'] == "TextInput") {
         String prefix = item['prefix'] ?? "";
+        String keyboardType = item['keyboardType'] ?? "";
+
         // fieldController = TextFie
         listWidget.add(new FormBuilderTextField(
           // controller: fieldController,
@@ -132,7 +134,9 @@ class _CoreFormState extends State<JsonSchema> {
           validator: FormBuilderValidators.compose([
             FormBuilderValidators.required(context),
           ]),
-          keyboardType: TextInputType.name,
+          keyboardType: keyboardType == 'number'
+              ? TextInputType.phone
+              : TextInputType.name,
           textInputAction: TextInputAction.next,
         ));
       } else if (item['type'] == "Dropdown") {
