@@ -12,6 +12,59 @@ class HelloScreen extends StatefulWidget {
 }
 
 class _HelloScreenState extends State<HelloScreen> {
+  Map a = {};
+
+  List<Map> data = [
+    {"title": 'A', "subtitle": 'Hindi'},
+    {"title": 'A', "subtitle": 'English'},
+    {"title": 'C', "subtitle": 'Kannda'},
+    {"title": 'C', "subtitle": 'Bengali'},
+    {"title": 'C', "subtitle": 'Tamil'},
+    {"title": 'C', "subtitle": 'Tamil'},
+    {"title": 'C', "subtitle": 'Tamil'},
+    {"title": 'C', "subtitle": 'Tamil'},
+    {"title": 'C', "subtitle": 'Tamil'},
+    {"title": 'C', "subtitle": 'Tamil'},
+    {"title": 'C', "subtitle": 'Tamil'},
+    {"title": 'C', "subtitle": 'Tamil'},
+    {"title": 'C', "subtitle": 'Tamil'},
+  ];
+
+  List<Widget> _myLanguageOptions() {
+    List<Widget> result = [];
+
+    for (var i = 0; i < data.length; i++) {
+      Widget x = Container(
+          padding: EdgeInsets.all(5.0),
+          width: 120,
+          height: 90,
+          child: Card(
+            color: Colors.white,
+            clipBehavior: Clip.antiAlias,
+            shadowColor: Colors.black,
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text(
+                    data[i]['title'],
+                    textAlign: TextAlign.center,
+                  ),
+                  subtitle: Text(
+                    data[i]['subtitle'],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                  ),
+                ),
+              ],
+            ),
+          ));
+
+      result.add(x);
+    }
+
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,296 +87,12 @@ class _HelloScreenState extends State<HelloScreen> {
               )
             ]),
             Wrap(
+              children: _myLanguageOptions(),
+            ),
+            Wrap(
               crossAxisAlignment: WrapCrossAlignment.center,
               spacing: 5,
               children: [
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 100,
-                    height: 90,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'A',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Hindi',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 100,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'A',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w900, fontSize: 20.0),
-                            ),
-                            subtitle: Text(
-                              'English',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 105,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'C',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Kannada',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 100,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'C',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Bengali',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 100,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'C',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Telugu',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 100,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'C',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Tamil',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 100,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'C',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Gujarati',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 100,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'C',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Marathi',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 100,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'C',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Odiya',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 110,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'C',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Assames',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Container(
-                    padding: EdgeInsets.all(5.0),
-                    width: 110,
-                    height: 90,
-                    // color: Colors.amber,
-                    child: Card(
-                      color: Colors.white,
-                      clipBehavior: Clip.antiAlias,
-                      shadowColor: Colors.black,
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: const Text(
-                              'D',
-                              textAlign: TextAlign.center,
-                            ),
-                            subtitle: Text(
-                              'Malayala',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black.withOpacity(0.6)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
                 Container(
                   width: 300,
                   height: 100,
