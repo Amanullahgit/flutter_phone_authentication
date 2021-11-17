@@ -2,7 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:phone_auth_project/home_list.dart';
 import 'package:pinput/pin_put/pin_put.dart';
-import 'form_builder/onboard_form.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timer_button/timer_button.dart';
+import 'package:provider/provider.dart';
+
+import './../models/eligibility.dart';
+import './company_code.dart';
 import './utils/supabase_service.dart';
 
 class OTPScreen extends StatefulWidget {
@@ -13,6 +18,10 @@ class OTPScreen extends StatefulWidget {
 }
 
 class _OTPScreenState extends State<OTPScreen> {
+  // User related
+  String uid;
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String _verificationCode;
   final TextEditingController _pinPutController = TextEditingController();
@@ -60,30 +69,7 @@ class _OTPScreenState extends State<OTPScreen> {
                           verificationId: _verificationCode, smsCode: pin))
                       .then((value) async {
                     if (value.user != null) {
-                      String phone = widget.phone;
-
-                      SupabaseService supabase = new SupabaseService();
-                      // TODO: This filter does nor works
-                      final selectResponse =
-                          await supabase.filter("onboarding", "mobile", phone);
-
-                      if (selectResponse.error == null) {
-                        print('response.data: ${selectResponse.data}');
-                        final List data = selectResponse.data;
-                        if (data.length == 0) {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OnboardingScreen()),
-                              (route) => false);
-                        } else {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreen()),
-                              (route) => false);
-                        }
-                      }
+                      _actionOnUserPresent(context);
                     }
                   });
                 } catch (e) {
@@ -98,14 +84,50 @@ class _OTPScreenState extends State<OTPScreen> {
               },
             ),
           ),
-          TextButton(
-              onPressed: () {
-                _verifyPhone();
-              },
-              child: Text('Resend otp'))
+          SizedBox(
+            height: 60,
+          ),
+          new TimerButton(
+            label: "Resend OTP",
+            timeOutInSeconds: 50,
+            onPressed: () {
+              _verifyPhone();
+            },
+            disabledColor: Colors.grey,
+            color: Colors.deepPurple[400],
+            buttonType: ButtonType.OutlinedButton,
+            disabledTextStyle: new TextStyle(fontSize: 10.0),
+            activeTextStyle:
+                new TextStyle(fontSize: 10.0, color: Colors.deepPurpleAccent),
+          ),
+          // TextButton(
+          //     onPressed: () {
+          //       _verifyPhone();
+          //     },
+          //     child: Text('Resend otp'))
         ],
       ),
     );
+  }
+
+  Future<void> _setUserLoggedIn(context) async {
+    final SharedPreferences prefs = await _prefs;
+    // Use isLoggedIn as a checker around the application
+    prefs.setBool("isLoggedIn", true);
+
+    String mobile =
+        Provider.of<ExamEvaluateModal>(context, listen: false).mobile;
+
+    prefs.setString("mobile", mobile);
+  }
+
+  void _actionOnUserPresent(context) {
+    _setUserLoggedIn(context);
+
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => CompanyCodeScreen()),
+        (route) => false);
   }
 
   _verifyPhone() async {
@@ -116,10 +138,7 @@ class _OTPScreenState extends State<OTPScreen> {
               .signInWithCredential(credential)
               .then((value) async {
             if (value.user != null) {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => OnboardingScreen()),
-                  (route) => false);
+              _actionOnUserPresent(context);
             }
           });
         },

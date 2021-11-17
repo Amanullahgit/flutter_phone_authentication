@@ -77,7 +77,8 @@ class _HelloScreenState extends State<HelloScreen> {
                             title: const Text(
                               'A',
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20.0),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900, fontSize: 20.0),
                             ),
                             subtitle: Text(
                               'English',
@@ -141,7 +142,7 @@ class _HelloScreenState extends State<HelloScreen> {
                         ],
                       ),
                     )),
-                    Container(
+                Container(
                     padding: EdgeInsets.all(5.0),
                     width: 100,
                     height: 90,
@@ -167,7 +168,7 @@ class _HelloScreenState extends State<HelloScreen> {
                         ],
                       ),
                     )),
-                    Container(
+                Container(
                     padding: EdgeInsets.all(5.0),
                     width: 100,
                     height: 90,
@@ -193,7 +194,7 @@ class _HelloScreenState extends State<HelloScreen> {
                         ],
                       ),
                     )),
-                    Container(
+                Container(
                     padding: EdgeInsets.all(5.0),
                     width: 100,
                     height: 90,
@@ -219,7 +220,7 @@ class _HelloScreenState extends State<HelloScreen> {
                         ],
                       ),
                     )),
-                    Container(
+                Container(
                     padding: EdgeInsets.all(5.0),
                     width: 100,
                     height: 90,
@@ -332,12 +333,11 @@ class _HelloScreenState extends State<HelloScreen> {
                     child: Column(
                       children: [
                         ListTile(
-                          title: const Text(
-                            'Please choose a language from above. You can change language from profile settings later.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.brown),
-                          )
-                        ),
+                            title: const Text(
+                          'Please choose a language from above. You can change language from profile settings later.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.brown),
+                        )),
                       ],
                     ),
                   ),
@@ -345,13 +345,15 @@ class _HelloScreenState extends State<HelloScreen> {
                 Container(),
                 Center(
                   child: ElevatedButton(
-                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.green[200])),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green[200])),
                     child: Text(
                       'Continue',
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     onPressed: () {
-                        // Respond to button press
+                      // Respond to button press
                     },
                   ),
                 ),

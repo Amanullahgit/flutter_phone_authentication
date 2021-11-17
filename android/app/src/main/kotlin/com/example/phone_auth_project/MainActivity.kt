@@ -1,4 +1,4 @@
-package com.example.phone_auth_project
+package com.dashhire.dashhire_screening
 
 import io.flutter.embedding.android.FlutterActivity
 

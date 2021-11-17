@@ -7,6 +7,7 @@ import './utils/supabase_service.dart';
 import './widgets/button_widget.dart';
 
 class Congrates extends StatelessWidget {
+  bool _isInitialized;
 //Remark Logic
   String resultPhrase(int resultScore) {
     String resultText;
@@ -70,6 +71,11 @@ class Congrates extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (this._isInitialized == null || !this._isInitialized) {
+      submitApplication(context);
+      this._isInitialized = true;
+    }
+
     // TODO: Not a good place to add, place it somewhere
     // calculate total mark
     // context.read<ExamEvaluateModal>().markScored();
@@ -77,52 +83,69 @@ class Congrates extends StatelessWidget {
     int _markScored =
         Provider.of<ExamEvaluateModal>(context, listen: false).mark_scored;
 
-    return Scaffold(
-        appBar: AppBar(title: Text('Result')),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                // resultPhrase(context.watch<ExamEvaluateModal>().mark_scored),
-                resultPhrase(_markScored),
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ), //Text
-              Text(
-                'Score $_markScored',
-                style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "Our executive will reach out to you",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
+    return FutureBuilder(
+        // future: submitApplication(context),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(child: Text('Please wait its loading...'));
+      } else {
+        // TODO: Business logic what happens when API has error
+        if (snapshot.hasError)
+          return Center(child: Text('Error: ${snapshot.error}'));
+        else {
+          return Scaffold(
+              appBar: AppBar(title: Text('Result')),
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      // resultPhrase(context.watch<ExamEvaluateModal>().mark_scored),
+                      resultPhrase(_markScored),
+                      style:
+                          TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ), //Text
+                    Text(
+                      'Score $_markScored',
+                      style:
+                          TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      "Our executive will reach out to you",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
 
-              RoundedButtonWidget(
-                  buttonText: 'Submit your Score with us',
-                  onPressed: () {
-                    submitApplication(context);
-                  }),
+                    // RoundedButtonWidget(
+                    //     buttonText: 'Submit your Score with us',
+                    //     onPressed: () {
+                    //       submitApplication(context);
+                    //     }),
 
-              //Text
-              MaterialButton(
-                child: Text(
-                  'Restart Quiz!',
-                ), //Text
-                textColor: Colors.blue,
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                      (route) => false);
-                },
-              ), //FlatButton
-            ], //<Widget>[]
-          ), //Column
-        ) //C,
-        );
+                    //Text
+                    MaterialButton(
+                      child: Text(
+                        'Goto jobs listing',
+                      ), //Text
+                      textColor: Colors.blue,
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen()),
+                            (route) => false);
+                      },
+                    ), //FlatButton
+                  ], //<Widget>[]
+                ), //Column
+              ) //C,
+              );
+        }
+      }
+    });
   }
 }
 

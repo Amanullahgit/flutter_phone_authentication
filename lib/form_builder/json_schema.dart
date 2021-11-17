@@ -113,6 +113,15 @@ class _CoreFormState extends State<JsonSchema> {
       // var fieldController;
 
       if (item['type'] == "TextInput") {
+        String prefix = item['prefix'] ?? "";
+        String keyboardType = item['keyboardType'] ?? "";
+        bool validation = item['validation'] != null ? true : false;
+        dynamic validator = validation
+            ? (item['validation']['required']
+                ? FormBuilderValidators.required(context)
+                : null)
+            : null;
+
         // fieldController = TextFie
         listWidget.add(new FormBuilderTextField(
           // controller: fieldController,
@@ -121,17 +130,17 @@ class _CoreFormState extends State<JsonSchema> {
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: item['labelText'],
-
+            prefix: Text(prefix),
             // helperText: 'Helper text',
             // hintText: 'Hint text',
           ),
           onChanged: (val) {
             print("val $val");
           },
-          validator: FormBuilderValidators.compose([
-            FormBuilderValidators.required(context),
-          ]),
-          keyboardType: TextInputType.name,
+          validator: validator,
+          keyboardType: keyboardType == 'number'
+              ? TextInputType.number
+              : TextInputType.name,
           textInputAction: TextInputAction.next,
         ));
       } else if (item['type'] == "Dropdown") {
