@@ -19,15 +19,13 @@ class _HelloScreenState extends State<HelloScreen> {
     {"title": 'A', "subtitle": 'English'},
     {"title": 'C', "subtitle": 'Kannda'},
     {"title": 'C', "subtitle": 'Bengali'},
+    {"title": 'C', "subtitle": 'Telugu'},
     {"title": 'C', "subtitle": 'Tamil'},
-    {"title": 'C', "subtitle": 'Tamil'},
-    {"title": 'C', "subtitle": 'Tamil'},
-    {"title": 'C', "subtitle": 'Tamil'},
-    {"title": 'C', "subtitle": 'Tamil'},
-    {"title": 'C', "subtitle": 'Tamil'},
-    {"title": 'C', "subtitle": 'Tamil'},
-    {"title": 'C', "subtitle": 'Tamil'},
-    {"title": 'C', "subtitle": 'Tamil'},
+    {"title": 'C', "subtitle": 'Gujarati'},
+    {"title": 'C', "subtitle": 'Marathi'},
+    {"title": 'C', "subtitle": 'Odiya'},
+    {"title": 'C', "subtitle": 'Assames'},
+    {"title": 'C', "subtitle": 'Malayalam'},
   ];
 
   List<Widget> _myLanguageOptions() {
