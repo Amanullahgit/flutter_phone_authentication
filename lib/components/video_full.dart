@@ -12,10 +12,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class CameraExampleHome extends StatefulWidget {
+class CameraHomeScreen extends StatefulWidget {
   @override
-  _CameraExampleHomeState createState() {
-    return _CameraExampleHomeState();
+  _CameraHomeScreenState createState() {
+    return _CameraHomeScreenState();
   }
 }
 
@@ -41,7 +41,7 @@ void logError(String code, String message) {
   }
 }
 
-class _CameraExampleHomeState extends State<CameraExampleHome>
+class _CameraHomeScreenState extends State<CameraHomeScreen>
     with WidgetsBindingObserver, TickerProviderStateMixin {
   CameraController controller;
   XFile imageFile;
@@ -1005,7 +1005,7 @@ class CameraApp extends StatelessWidget {
               return Center(child: Text('Error: ${snapshot.error}'));
             else
               return MaterialApp(
-                home: CameraExampleHome(),
+                home: CameraHomeScreen(),
               ); // snapshot.data  :- get your object which is pass from your downloadData() function
           }
         });

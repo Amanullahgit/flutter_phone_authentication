@@ -42,6 +42,7 @@ dependencies:
   supabase: ^0.2.9
   flutter_easyloading: ^3.0.3
   timer_button: ^2.0.0
+  file_picker: ^4.2.3
 
 
 dev_dependencies:
