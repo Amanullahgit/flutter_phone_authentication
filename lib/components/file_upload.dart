@@ -42,7 +42,7 @@ class _FileUploadScreenState extends State<FileUploadScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () {
                     _onFileUpload();
                   },
