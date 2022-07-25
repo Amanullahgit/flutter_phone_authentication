@@ -1,4 +1,4 @@
-# Phone Number Authentication Using Flutter & Firebase
+# Phone Number Authentication Using Flutter 3 & Firebase
 
 This is the source code for Phone Authentication in FLutter.<br>
 
