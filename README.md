@@ -11,6 +11,7 @@ This is the source code for Phone Authentication in FLutter.<br>
 For Step By Step Guide Follow Video Tutorial:
 
 - [Flutter Phone Authentication | Implementing Phone Auth Using Flutter & Firebase](https://youtu.be/PEUUYOQ2Ixo)
+- [Flutter Phone Authentication With Firebase | Flutter 3 Updated Code](https://youtu.be/Xe30neH4ppE)
 
 ## Links used in project:
 
